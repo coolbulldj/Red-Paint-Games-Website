@@ -35,16 +35,15 @@ h1 {
     font-size: clamp(0.5rem, 2vw, 4rem);
     top: 25%;
     left: 15%;
-    transform: translate(-50%, -50%); /* centers */
 }
-
+/*
 .menu_home_button {
 
 }
 
 .menu_contact_button {
 
-}
+} */
 
 /* Games */
 .games_box {
@@ -84,9 +83,15 @@ h1 {
 }
 
 .framework_button {
-
+    color: aliceblue;
+    font-family:  sans-serif;
+    font-size: clamp(0.5rem, 2.5vw, 5rem); 
+    width: 20%;
+    aspect-ratio: 12;
+    position: relative;
+    left: 50%;
 }
-
+/*
 .development_team_button {
 
 }
@@ -96,5 +101,6 @@ h1 {
 }
 
 .stats {
-    
+
 }
+*/
