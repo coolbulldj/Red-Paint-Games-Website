@@ -51,17 +51,7 @@
 }
 
 .menu_home_button:hover {
-    background-color: #00000000; /* Green */
-    border: none;
     color: rgb(255, 0, 0);
-    padding: 15px 32px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: clamp(0.5rem, 1.25vw, 3rem);
-    width: 5%;
-    position: relative;
-    left: 50%;
 }
 
 .menu_contact_button {
@@ -79,17 +69,7 @@
 }   
 
 .menu_contact_button:hover {
-    background-color: #00000000; /* Green */
-    border: none;
     color: rgb(255, 0, 0);
-    padding: 15px 32px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: clamp(0.5rem, 1.25vw, 3rem);
-    width: 5%;
-    position: relative;
-    left: 51%;
 }
 
 /* Opening */
@@ -260,6 +240,37 @@
     left:0%;
 }
 
+
+.game_holder {
+    background-color: aquamarine;
+    width: 90%;
+    aspect-ratio: 1;
+    position: relative;
+    margin-inline: auto;
+    top:4%;
+    /* IN box alignment */
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2%;
+}
+
 .main_game_box {
+    background-color: blueviolet;
+
+    width: 45%;
+    aspect-ratio: 1.5;
+    max-height: fit-content;
+}
+
+.main_game_box_title {
+
+}
+
+.main_game_box_ccu {
+
+}
+
+.main_game_box_vists {
     
 }
