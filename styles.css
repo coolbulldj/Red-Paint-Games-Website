@@ -242,7 +242,7 @@
 
 
 .game_holder {
-    background-color: aquamarine;
+    background-color: rgb(127, 255, 212);
     width: 90%;
     aspect-ratio: 1;
     position: relative;
@@ -257,20 +257,59 @@
 
 .main_game_box {
     background-color: blueviolet;
-
     width: 45%;
     aspect-ratio: 1.5;
     max-height: fit-content;
 }
 
-.main_game_box_title {
+.main_game_box:hover {
+    width: 47%;
 
 }
+
+.game_detail_box {
+    background-color: rgb(66, 66, 66);
+    border: none;
+    color: aliceblue;
+    width: 65%;
+    height: 12%;
+    position: relative;
+    top: 10%;
+    margin-inline: auto; /* centers div lol */
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2%;
+}
+
+.main_game_box_title {
+    font-family: sans-serif;
+    color:aliceblue;
+    background-color: aqua;
+    font-size: clamp(0.5rem, 2.5vw, 5rem);
+    width: 40%;
+    height: 20%;
+    position: relative;
+    top:0%;
+    left:0%;
+}   
 
 .main_game_box_ccu {
-
+    background-color: aqua;
+    font-family: sans-serif;
+    color: aliceblue;
+    font-size: clamp(0.5rem, 1vw, 5rem);
+    width: 30%;
+    height: 100%;
+    position: relative;
 }
 
-.main_game_box_vists {
-    
+.main_game_box_vists-likes {
+    background-color: aqua;
+    font-family: sans-serif;
+    color: aliceblue;
+    font-size: clamp(0.5rem, 1vw, 5rem);
+    width: 30%;
+    height: 100%;
+    position: relative;
 }
