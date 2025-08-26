@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+:root {
+    --game-box-subtext: rgb(255, 255, 255);
+}
 
 .menu_box {
     aspect-ratio: 40; 
@@ -222,7 +225,7 @@
 .games_box {
     width: 100%;
     aspect-ratio: 1;
-    background-color: rgb(192, 192, 192);
+    background-color: rgb(255, 255, 255);
     margin: 0;
     max-width: 100vw;
 }
@@ -242,31 +245,79 @@
 
 
 .game_holder {
-    background-color: rgb(127, 255, 212);
+    background-color: rgba(127, 255, 212, 0);
     width: 90%;
     aspect-ratio: 1;
     position: relative;
     margin-inline: auto;
     top:4%;
     /* IN box alignment */
-    display:flex;
-    justify-content: center;
-    flex-direction: row;
-    gap: 2%;
+    grid-template-columns: repeat(2);
+    gap:2vw;
 }
 
 .main_game_box {
     background-color: blueviolet;
     width: 45%;
-    aspect-ratio: 1.5;
-    max-height: fit-content;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: none;
+    border-radius: 1vw;
+    /*Image background */
+    background-repeat: no-repeat;   /* 🚫 no tiling */
+    background-size: contain;       /* scale image inside box */
+    background-position: center;    /* center it */
 }
 
 .main_game_box:hover {
     width: 47%;
-
 }
 
+.main_game_box.img1 {
+    background-image: url('https://tr.rbxcdn.com/180DAY-52e1eadc10cea441bd69181ed69723d4/768/432/Image/Webp/noFilter');
+}
+
+.main_game_box.img2 {
+    background-image: url();
+}
+
+.main_game_box.img3 {
+    background-image: url();
+}
+
+.main_game_box.img4 {
+    background-image: url();
+}
+
+.main_game_box_title {
+    font-family: sans-serif;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+    background-color: rgba(0, 255, 255, 0);
+    font-size: clamp(0.5rem, 1.5vw, 5rem);
+    width: 40%;
+    height: 7%;
+    position: relative;
+    margin-inline: auto;
+    top:30%;
+    left:0%;
+}   
+
+.game_box_display_play {
+    background-color: rgb(17, 24, 39);
+    color: rgb(255, 255, 255);
+    font-size: clamp(0.5rem, 2vw, 5rem);
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    width: 100%;
+    height: 20%;
+    margin-inline: auto;
+    position: relative;
+    top:32%
+}
+
+/* Inside game description details */
 .game_detail_box {
     background-color: rgb(66, 66, 66);
     border: none;
@@ -274,7 +325,7 @@
     width: 65%;
     height: 12%;
     position: relative;
-    top: 10%;
+    top: 35%;
     margin-inline: auto; /* centers div lol */
     display:flex;
     justify-content: center;
@@ -282,34 +333,33 @@
     gap: 2%;
 }
 
-.main_game_box_title {
-    font-family: sans-serif;
-    color:aliceblue;
-    background-color: aqua;
-    font-size: clamp(0.5rem, 2.5vw, 5rem);
-    width: 40%;
-    height: 20%;
-    position: relative;
-    top:0%;
-    left:0%;
-}   
-
 .main_game_box_ccu {
-    background-color: aqua;
+    background-color: rgba(0, 255, 255, 0);
     font-family: sans-serif;
-    color: aliceblue;
-    font-size: clamp(0.5rem, 1vw, 5rem);
-    width: 30%;
+    color: var(--game-box-subtext);
+    font-size: clamp(0.25rem, 1vw, 5rem);
+    width: fit-content;
+    height: 100%;
+    position: relative;
+
+}
+
+.main_game_box_vists {
+    background-color: rgba(0, 255, 255, 0);
+    font-family: sans-serif;
+    color: var(--game-box-subtext);
+    font-size: clamp(0.25rem, 1vw, 5rem);
+    width: fit-content;
     height: 100%;
     position: relative;
 }
 
-.main_game_box_vists-likes {
-    background-color: aqua;
+.main_game_box_rating{
+    background-color: rgba(0, 255, 255, 0);
     font-family: sans-serif;
-    color: aliceblue;
-    font-size: clamp(0.5rem, 1vw, 5rem);
-    width: 30%;
+    color: var(--game-box-subtext);
+    font-size: clamp(0.25rem, 1vw, 5rem);
+    width: fit-content;
     height: 100%;
     position: relative;
 }
