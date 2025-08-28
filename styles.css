@@ -275,6 +275,8 @@
     background-repeat: no-repeat;   /* 🚫 no tiling */
     background-size: contain;       /* scale image inside box */
     background-position: center;    /* center it */
+
+    transition: width 0.2s ease-in-out;
 }
 
 .main_game_box:hover {
@@ -446,7 +448,7 @@
 }
 
 .team_member_box.img4 {
-    background-image: url('https://i.pinimg.com/736x/28/c4/14/28c4142752414161ed620ba1e4fd36ee.jpg');
+    background-image: url('https://wallpapers-clan.com/wp-content/uploads/2022/02/naruto-pfp-10.jpg');
 }
 
 .team_member_name {
@@ -497,12 +499,57 @@
     left:0%;
 }
 
+.contact_input_box_title {
+    background-color: rgba(156, 156, 26, 0);
+    color: rgb(0, 0, 0);
+    font-family:  sans-serif;
+    font-weight: 525;
+    font-size: clamp(0.5rem, 1.25vw, 5rem);
+    max-width: 40%;
+    max-width: fit-content;
+    margin-inline: auto;
+}
+
+.contact_input_box_title.name {
+    position: relative;
+    top:15%;
+    left: -14%;
+}
+
+.contact_input_box_title.email {
+    position: relative;
+    top:16%;
+    left: -14%;
+}
+
+.contact_input_box_title.phone_number {
+    position: relative;
+    top:18%;
+    left: -11.5%;
+}
+
+.contact_input_box_title.discord {
+    position: relative;
+    top:20%;
+    left: -14%;
+}
+
+.contact_input_box_title.message {
+    position: relative;
+    top:23%;
+    left: -20%;
+}
+
+
 .contact_input_box {
     background-color: rgb(213, 213, 213);
     color:rgb(0, 0, 0);
 
     font-family: sans-serif;
     font-size: clamp(0.5rem, 1vw, 5rem);
+
+    text-align: left;
+
 
     width: 35%;
     aspect-ratio: 14;
@@ -519,24 +566,24 @@
     font-family: sans-serif;
 }
 
+.contact_input_box.name {
+    position: relative;
+    top: 15%;
+}
+
 .contact_input_box.email {
     position: relative;
-    top: 20%;
+    top: 17%;
 }
 
 .contact_input_box.phone_number {
     position: relative;
-    top: 25%;
+    top: 19%;
 }
 
 .contact_input_box.discord {
     position: relative;
-    top: 30%;
-}
-
-.contact_input_box.name {
-    position: relative;
-    top: 15%;
+    top: 21%;
 }
 
 .contact_input_box.message {
@@ -544,17 +591,17 @@
     aspect-ratio: 6;
 
     position: relative;
-    top: 35%;
+    top: 23.5%;
 }
 
 
 .contact_submit_button {
-    background-color: rgb(125, 125, 125);
+    background-color: rgb(17, 24, 39);
     color: rgb(255, 255, 255);
 
     font-family:  sans-serif;
     font-size: clamp(0.5rem, 2vw, 5rem);
-    font-weight: 525;
+    font-weight: 700;
     
     width:50%;
     aspect-ratio: 20;
@@ -564,7 +611,7 @@
     margin-inline: auto;
 
     position: relative;
-    top:45%;
+    top:30%;
     left:0%;
 }
 
@@ -584,4 +631,41 @@
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
+}
+
+.icon_button {
+    width: 5%;
+    aspect-ratio: 1;
+
+    border-radius: 3vw;
+
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+
+    /*Image background */
+    background-repeat: no-repeat;   /* 🚫 no tiling */
+    background-size: contain;       /* scale image inside box */
+    background-position: center;    /* center it */
+}
+
+.icon_button.instagram {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/042/148/632/non_2x/instagram-logo-instagram-social-media-icon-free-png.png');
+    position: relative;
+    top: 0%;
+    left: -40%;
+}
+
+.icon_button.youtube {
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/018/930/575/small_2x/youtube-logo-youtube-icon-transparent-free-png.png');
+    position: relative;
+    top: 0%;
+    left: -40%;
+}
+
+.icon_button.twitter {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnVdI9NGCSPuN3aDAwzPNj1uwxV_2bdy2OIQ&s');
+    position: relative;
+    top: 0%;
+    left: -40%;
 }
