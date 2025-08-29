@@ -47,7 +47,7 @@
                     <h1 class = "game_box_display_play">Play</h1>
                 </button>
                 <button class = "main_game_box img2">
-                    <h1 class = "main_game_box_title">Fallout New Vegas</h1>
+                    <h1 class = "main_game_box_title">FaWllout New Vegas</h1>
                     <div class = "game_detail_box">
                         <p class = "main_game_box_ccu">10,067 active players</p>
                         <p class = "main_game_box_vists">1,276,467 Vists</p>
@@ -120,17 +120,19 @@
         </div>
         <div class = "contact_box">
             <h1 class = "contact_title">Contact Us</h1>
-            <p class = "contact_input_box_title name"> Your Name</p>
-            <input class = "contact_input_box name" placeholder="John doe">
-            <p class = "contact_input_box_title email">Your Email</p>
-            <input class = "contact_input_box email" placeholder="you@example.com">
-            <p class = "contact_input_box_title phone_number">Your Phone Number</p>
-            <input class = "contact_input_box phone_number" placeholder="1234567890">
-            <p class = "contact_input_box_title discord">Your Discord</p>
-            <input class = "contact_input_box discord" placeholder="duckgoose123"> 
-            <p class = "contact_input_box_title message">Your message</p>
-            <input class = "contact_input_box message">
-            <button class = "contact_submit_button">Send Your Message</button>
+            <div class = "contact_input_holder">
+                <p class = "contact_input_box_title name"> Your Name</p>
+                <p class = "contact_input_box_title email">Your Email</p>
+                <input class = "contact_input_box name" placeholder="John doe">
+                <input class = "contact_input_box email" placeholder="you@example.com">
+                <p class = "contact_input_box_title phone_number"> Your Phone Number</p>
+                <p class = "contact_input_box_title discord">Your Discord</p>
+                <input class = "contact_input_box phone_number" placeholder="1234567890">
+                <input class = "contact_input_box discord" placeholder="duckgoose123"> 
+                <p class = "contact_input_box_title message"> Your Message</p>
+                <input class = "contact_input_box message" placeholder="Type your message here...">
+            </div>
+            <button class = "contact_submit_button" id = "SubmitContactButton">Send Your Message</button>
         </div>
         <div class = "socials_box">
             <button class = "icon_button instagram"></button>
@@ -139,8 +141,9 @@
         </div>
         <div class="menu_box">
             <h1 class = "menu_title">Red paint games</h1>
-            <button class = "menu_home_button">Home</button>
+            <button class = "menu_home_button" id = "HomeButton">Home</button>
             <button class = "menu_contact_button">Contact</button>
         </div>
     </body>
+    <script src="script.js"></script>
 </html>
