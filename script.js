@@ -1,5 +1,12 @@
 
+const home_url = "/home.html"
+const frameworks_url = "/framework.html"
+
 function HomeButtonClick() {
+    if (window.location.pathname !== home_url) {
+        window.location.replace(home_url)
+    }
+
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -15,7 +22,7 @@ function DevTeamButtonClick() {
 }
 
 function FrameworksButtonClick() {
-    document.getElementById("FrameworkSection").scrollIntoView({ behavior: 'smooth' });
+    window.location.replace(frameworks_url)
 }
 
 function GamesButtonClick() {
@@ -60,3 +67,4 @@ document.getElementById("TwitterIcon").onclick = TwitterRedirect;
 document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
 document.getElementById("DiscordIcon").onclick = DiscordRedirect;
 document.getElementById("InstagramIcon").onclick = InstagramRedirect;
+
