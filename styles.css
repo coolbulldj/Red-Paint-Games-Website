@@ -655,6 +655,12 @@
     background-position: center;    /* center it */
 }
 
+.icon_button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
 .icon_button.instagram {
     background-image: url('https://static.vecteezy.com/system/resources/previews/042/148/632/non_2x/instagram-logo-instagram-social-media-icon-free-png.png');
     position: relative;
