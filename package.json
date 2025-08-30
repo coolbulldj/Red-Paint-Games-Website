@@ -1,3 +1,25 @@
 {
-    "name": "red-paint-games"
+  "name": "red-paint",
+  "version": "1.0.0",
+  "description": "Red Paint static website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coolbulldj/Red-Paint-Games-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/coolbulldj/Red-Paint-Games-Website/issues"
+  },
+  "homepage": "https://github.com/coolbulldj/Red-Paint-Games-Website#readme"
 }
