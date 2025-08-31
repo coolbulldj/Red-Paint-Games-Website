@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
 
+console.log(__dirname)
+
 const frontend_path = path.join(__dirname, "..", "frontend");
 
 app.use(
