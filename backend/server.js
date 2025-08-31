@@ -8,6 +8,8 @@ console.log(__dirname)
 
 const frontend_path = path.join(__dirname, "..", "frontend");
 
+console.log(frontend_path)
+
 app.use(
     express.json(),
     express.static(frontend_path)
