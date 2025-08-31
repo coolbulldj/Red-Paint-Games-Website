@@ -17,6 +17,7 @@ app.use(
 
 
 app.get('/', (req, res) => {
+    console.log("opening web")
     res.sendFile(path.join(frontend_path, 'home.html'));
 })
 
