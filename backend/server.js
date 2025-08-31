@@ -24,7 +24,27 @@ app.get('/', (req, res) => {
 app.post('/api/contact', (req, res) => {
     console.log(req.body)
     
-    //const transporter = nodemailer.createTransport()
+    const nodemailer = require("nodemailer");
+
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            type: "OAuth2",
+            user: "me@gmail.com",
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        },
+    });
+
+    const mailOptions = {
+        from: "your_email@gmail.com",
+        to: "recipient@example.com",
+        subject: "Hello from Nodemailer",
+        text: "This is a test email sent using Nodemailer.",
+    };
+
+   
 
     return res.sendStatus(200);
 })
