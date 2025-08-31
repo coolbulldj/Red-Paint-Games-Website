@@ -6,7 +6,7 @@ const app = express();
 
 console.log(__dirname)
 
-const frontend_path = path.join(__dirname, "..", "frontend");
+const frontend_path = path.join(__dirname, "frontend");
 
 console.log(frontend_path)
 
