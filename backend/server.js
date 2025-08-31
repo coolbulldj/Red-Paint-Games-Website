@@ -39,11 +39,6 @@ db.all(sql, [], (err, rows)=> {
     })
 })
 
-
-db.close((err) => {
-    if (err) return console.err(err.message)
-})
-
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
@@ -65,7 +60,10 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/contact', (req, res) => {
-    console.log(req.body)
+    const req_body = req.body
+
+    console.log(req_body)
+    console.log(req_body.email)
 
     const ip = req.ip
 
@@ -78,13 +76,13 @@ VALUES(?,?,?,?,?,?,?)`;
     db.run(
         sql, 
         [
-            'matthewjcdt@gmail.com',
-            'matt',
-            'coolbulldj',
-            '12345678910',
-            '192.2910.102',
-            'hello world',
-            'test'
+            req_body.email,
+            req_body.name,
+            req_body.discord,
+            req_body.phone,
+            ip,
+            req_body.message,
+            req_body.type
         ], 
         (err => {
             if (err) return console.error(err.message);
@@ -103,3 +101,8 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`listening on port ${port}...`))
 
+console.log("closing server")
+
+db.close((err) => {
+    if (err) return console.err(err.message)
+})

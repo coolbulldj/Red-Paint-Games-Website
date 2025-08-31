@@ -52,7 +52,8 @@ function SubmitButtonClick() {
             "email" : email_input.value,
             "phone" : phone_number_input.value,
             "discord" : discord_input.value,
-            "message" : message_input.value
+            "message" : message_input.value,
+            "type" : "contact"
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
