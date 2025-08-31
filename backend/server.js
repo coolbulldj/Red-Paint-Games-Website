@@ -1,5 +1,49 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+
+const sqlite3 = require('sqlite3').verbose();
+
+const db = new sqlite3.Database('./backend/userdata.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) return console.error(err.message);
+
+    console.log("database connection successful")
+})
+
+//db.run('CREATE TABLE userdata(email, name, discord, phone, ip, message, type)')
+
+/*const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type)
+VALUES(?,?,?,?,?,?,?)`; */
+
+const sql = 'SELECT * FROM userdata'
+/*
+db.run(
+    sql, 
+    [
+    'matthewjcdt@gmail.com',
+    'matt',
+    'coolbulldj',
+    '12345678910',
+    '192.2910.102',
+    'hello world',
+    'test'
+], (err => {
+    if (err) return console.error(err.message);
+
+    console.log('New data has been inserted')
+})) */
+
+db.all(sql, [], (err, rows)=> {
+    if (err) return console.error(err.message);
+
+    rows.forEach((row) => {
+        console.log(row)
+    })
+})
+
+
+db.close((err) => {
+    if (err) return console.err(err.message)
+})
+
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
@@ -17,34 +61,38 @@ app.use(
 
 
 app.get('/', (req, res) => {
-    console.log("opening web")
     res.sendFile(path.join(frontend_path, 'home.html'));
 })
 
 app.post('/api/contact', (req, res) => {
     console.log(req.body)
-    
-    const nodemailer = require("nodemailer");
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: "me@gmail.com",
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-        },
-    });
+    const ip = req.ip
 
-    const mailOptions = {
-        from: "your_email@gmail.com",
-        to: "recipient@example.com",
-        subject: "Hello from Nodemailer",
-        text: "This is a test email sent using Nodemailer.",
-    };
+    if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
 
-   
+
+    const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type)
+VALUES(?,?,?,?,?,?,?)`;
+
+    db.run(
+        sql, 
+        [
+            'matthewjcdt@gmail.com',
+            'matt',
+            'coolbulldj',
+            '12345678910',
+            '192.2910.102',
+            'hello world',
+            'test'
+        ], 
+        (err => {
+            if (err) return console.error(err.message);
+
+            console.log('New data has been inserted')
+        })
+    )
+
 
     return res.sendStatus(200);
 })
