@@ -68,7 +68,9 @@ app.post('/api/contact', (req, res) => {
     const ip = req.ip
 
     if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
-
+    
+    console.log("request from ip")
+    console.log(ip, req.socket.remoteAddress)
 
     const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type)
 VALUES(?,?,?,?,?,?,?)`;
