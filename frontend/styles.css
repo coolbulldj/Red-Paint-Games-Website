@@ -782,7 +782,6 @@
     background-color: aqua;
 
     width: 80%;
-    height: 40%;
 
     position: relative;
     top:15%;
@@ -801,22 +800,55 @@
     background-color: green;
 
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: none;
+    overflow: hidden;
+    border-radius: 1vw;
+    /*Image background */
+    background-repeat: no-repeat;   /* 🚫 no tiling */
+    background-size: contain;       /* scale image inside box */
+    background-position: center;    /* center it */
+
+    transition: width 0.2s ease-in-out;
 
     margin: 0%;
-
 }
 
-.framework_box.add_to_cart {
-
+.framework_box:hover {
+    width: 102%;
 }
 
-.framework_box.price_range {
+.framework_box_add_to_cart {
+    color:aquamarine;
+    background-color: blueviolet;
 
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 1.5vw, 3rem);
+
+    position: relative;
+    top:0%;
+    left:70%;
 }
 
-.framework_box.framework_name {
+.framework_box_price_range {
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 1.5vw, 3rem);
 
+    position: relative;
+    top:5%;
+    left:2%;
+}
+
+.framework_box_name {
+    color:rgb(255, 0, 0);
+
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 2.5vw, 3rem);
+
+    position: relative;
+    top:60%;
+    left:2%;
 }
 
 .checkout_page {
@@ -827,5 +859,14 @@
 }
 
 .checkout_title {
-
+    color: rgb(255, 0, 0);
+    font-family:  sans-serif;
+    font-size: clamp(0.5rem, 3vw, 5rem);
+    max-width: 40%;
+    background-color: rgba(127, 255, 212, 0);
+    position: relative;
+    max-width: fit-content;
+    margin-inline: auto;
+    top:8%;
+    left:0%;
 }
