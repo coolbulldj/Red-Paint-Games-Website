@@ -794,15 +794,17 @@
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
     grid-auto-rows: auto;
-    gap:0%;
-    row-gap: 0%;
+    gap:2%;
 }
 
 .framework_box {
     background-color: green;
 
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
+
+    margin: 0%;
+
 }
 
 .framework_box.add_to_cart {
