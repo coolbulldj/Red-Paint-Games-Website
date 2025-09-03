@@ -67,8 +67,6 @@ function CloseDB() {
     })
 }
 
-PrintOffDb();
-
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
@@ -114,18 +112,20 @@ app.post('/api/contact', (req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
-    json_table = []
+    json_table = [];
 
     db.all(sql, [], (err, rows)=> {
         if (err) return console.error(err.message);
 
         rows.forEach((row) => {
+            console.log('new row')
             console.log(row)
+            json_table.push(row)
         })
+
+        console.log(json_table)
+        res.json(json_table);
     })
-
-    
-
 })
 
 
