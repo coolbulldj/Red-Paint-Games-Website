@@ -43,8 +43,6 @@ VALUES(?,?,?,?,?,?,?)`;
         data, 
         (err => {
             if (err) return console.error(err.message);
-
-            console.log('New data has been inserted')
         })
     ) 
 }
@@ -84,12 +82,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/contact', (req, res) => {
-    const req_body = req.body
+    const req_body = req.body;
 
-    console.log(req_body)
-    console.log(req_body.email)
-
-    const ip = req.ip
+    const ip = req.ip;
 
     AddData([
         req_body.email,
@@ -102,28 +97,27 @@ app.post('/api/contact', (req, res) => {
     ])
 
     if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
-    
-    console.log("request from ip");
-    console.log(ip, req.socket.remoteAddress);
 
     PrintOffDb();
 
     return res.sendStatus(200);
 })
 
-app.get('/api/users', (req, res) => {
-    json_table = [];
+app.get('/api/users/:password', (req, res) => {
+    console.log(req.params)
+
+    if (req.params.password !== 'current_password') {
+        return res.sendStatus(403);
+    }
+
+    let json_table = [];
 
     db.all(sql, [], (err, rows)=> {
         if (err) return console.error(err.message);
 
         rows.forEach((row) => {
-            console.log('new row')
-            console.log(row)
-            json_table.push(row)
-        })
-
-        console.log(json_table)
+            json_table.push(row);
+        });
         res.json(json_table);
     })
 })
