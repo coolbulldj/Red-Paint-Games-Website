@@ -858,12 +858,13 @@
     aspect-ratio: 2;
 
     display: grid;
-    grid-template-rows: 10% 80% 10%;
-    grid-template-columns: 30% 70%;
+    column-gap: 5%;
+    grid-template-rows: 10% 70% 10%;
+    grid-template-columns: 40% 53%;
 }
 
 .checkout_title {
-    background-color: rgb(42, 42, 42);
+    background-color: rgba(42, 42, 42, 0);
     color: rgb(255, 0, 0);
 
     font-family:  sans-serif;
@@ -878,20 +879,19 @@
 }
 
 .checkout_form_holder {
-    background-color: rgb(128, 0, 255);
+    background-color: rgba(128, 0, 255, 0);
 
     width: 100%;
     height: 100%;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
     grid-auto-rows: auto;
     column-gap: 2%;
     row-gap: 1%;
 
-    grid-template-rows: 5% 12% 5% 12% 5% 40%;
+    grid-template-rows: 5% 10% 5% 10% 5% 10% 5% 10%;
 }
 
 .checkout_button {
@@ -914,20 +914,37 @@
 }
 
 .checkout_cart_holder {
-    background-color: rgb(0, 255, 170);
+    background-color: rgba(0, 255, 255, 0);
 
     width: 100%;
-    height: 100%;
+
+
+    margin-inline: auto;
 
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    align-items: center;
-    justify-items: center;
+
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
     grid-auto-rows: auto;
-    row-gap: 1%;
+    gap:2%;
 }
 
 .checkout_cart_item {
+    background-color: green;
 
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: none;
+    overflow: hidden;
+    border-radius: 1vw;
+    /*Image background */
+    background-repeat: no-repeat;   /* 🚫 no tiling */
+    background-size: contain;       /* scale image inside box */
+    background-position: center;    /* center it */
+
+    transition: width 0.2s ease-in-out;
+
+    margin: 0%;
 }
 

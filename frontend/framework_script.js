@@ -114,6 +114,11 @@ function AddToCartButtonClick(item_name) {
     }
 }
 
+function OnCheckout() {
+    alert('Checking out!');
+    alert(cart);
+}
+
 //Social Media redirects
 function TwitterRedirect() {
     window.open("https://twitter.com/RedPaintGames", "_blank");
@@ -143,6 +148,9 @@ add_to_cart_b.forEach(function(elem) {
     elem.addEventListener("click", AddToCartButtonClick);
 });
 
+const checkout_button = document.getElementById("CheckoutButton");
+
+checkout_button.onclick = OnCheckout;
 
 document.getElementById("TwitterIcon").onclick = TwitterRedirect;
 document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
