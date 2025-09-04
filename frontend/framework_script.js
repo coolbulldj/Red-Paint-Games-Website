@@ -104,9 +104,14 @@ function SubmitButtonClick() {
     })
 }
 
-function AddToCartButtonClick() {
-    console.log('Add to cart button clicked')
-    alert('Added to cart!');
+let cart = []
+
+function AddToCartButtonClick(item_name) {
+    return function() {
+        alert('Added to cart!');
+        cart.splice(0, 0, item_name);
+        alert(cart);    
+    }
 }
 
 //Social Media redirects
