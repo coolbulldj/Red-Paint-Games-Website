@@ -870,3 +870,25 @@
     top:8%;
     left:0%;
 }
+
+.checkout_form_holder {
+    background-color: rgba(102, 51, 153, 0);
+
+    width: 90%;
+    height: 65%;
+
+    margin-inline: auto;
+
+    position: relative;
+    top:15%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    grid-auto-rows: auto;
+    column-gap: 2%;
+    row-gap: 1%;
+
+    grid-template-rows: 5% 12% 5% 12% 5% 40%;
+}
