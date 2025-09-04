@@ -872,15 +872,16 @@
 }
 
 .checkout_form_holder {
-    background-color: rgba(102, 51, 153, 0);
+    background-color: rgb(128, 0, 255);
 
-    width: 90%;
+    width: 60%;
     height: 65%;
 
     margin-inline: auto;
 
     position: relative;
     top:15%;
+    left:18%;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
