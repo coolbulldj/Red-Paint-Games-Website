@@ -5,6 +5,16 @@ const frameworks_url = "/framework.html"
 const contact_api_url = "/api/contact"
 const purchase_api_url = ""
 
+const AddCartBColors = {
+    [true] : "#ff0000ff",
+    [false] : "#11ff00ff"
+}
+
+const AddCartBText = {
+    [true] : "Remove from cart",
+    [false] : "Add to Cart"    
+}
+
 function exit( status ) {
     // http://kevin.vanzonneveld.net
     // +   original by: Brett Zamir (http://brettz9.blogspot.com)
@@ -104,19 +114,63 @@ function SubmitButtonClick() {
     })
 }
 
+function AddCheckoutElement(item_name) {
+    const checkout_list = document.getElementById("CheckoutList");
+
+    const checkout_framework = document.createElement("div");
+    checkout_framework.id = item_name+"_checkout_item";
+    checkout_framework.className = "checkout_cart_item";
+
+    const framework_name = document.createElement("p");
+    framework_name.className = "checkout_cart_item_name";
+    framework_name.innerText = item_name;
+
+    //Add framework name to the checkout item
+    checkout_framework.appendChild(framework_name);
+
+    //Add the checkout item to the checkout list
+    checkout_list.appendChild(checkout_framework);
+}
+
+function RemoveCheckoutElement(elem) { 
+    elem.remove();
+}
+
 let cart = []
 
 function AddToCartButtonClick(item_name) {
-    return function() {
-        alert('Added to cart!');
+    return function(elem) {
+        const cart_b = elem.currentTarget;
+
+        const checkout_element = document.getElementById(item_name+"_checkout_item");
+        //check if item already exists
+        if (checkout_element) {
+        
+            cart_b.textContent  = AddCartBText[false];
+            cart_b.style.backgroundColor = AddCartBColors[false];
+
+            RemoveCheckoutElement(checkout_element);
+            return;
+        } 
+        //Redesign button
+        cart_b.textContent  = AddCartBText[true];
+        cart_b.style.backgroundColor = AddCartBColors[true];
+
         cart.splice(0, 0, item_name);
-        alert(cart);    
+        AddCheckoutElement(item_name);
     }
 }
 
 function OnCheckout() {
     alert('Checking out!');
     alert(cart);
+    
+}
+
+
+function ClearCheckoutElements() {
+    const checkout_list = document.getElementById("CheckoutList");
+    checkout_list.innerHTML = "";
 }
 
 //Social Media redirects
@@ -145,7 +199,7 @@ document.getElementById("ContactButton").onclick = ContactButtonClick;
 let add_to_cart_b = document.querySelectorAll(".framework_box_add_to_cart");
 
 add_to_cart_b.forEach(function(elem) {
-    elem.addEventListener("click", AddToCartButtonClick);
+    elem.addEventListener("click", AddToCartButtonClick("Such"));
 });
 
 const checkout_button = document.getElementById("CheckoutButton");
