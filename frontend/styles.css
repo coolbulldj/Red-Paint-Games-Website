@@ -917,6 +917,9 @@
     background-color: rgba(0, 255, 255, 0);
 
     width: 100%;
+    height: auto;
+
+    align-self: start;
 
 
     margin-inline: auto;
@@ -927,10 +930,11 @@
     align-items: start;
     grid-auto-rows: auto;
     gap:2%;
+    row-gap: 5%;
 }
 
 .checkout_cart_item {
-    background-color: green;
+    background-color: rgb(89, 173, 89);
 
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -946,5 +950,21 @@
     transition: width 0.2s ease-in-out;
 
     margin: 0%;
+}
+
+.checkout_cart_item:hover {
+    width: 102%;
+}
+
+.checkout_cart_item_name {
+    color:rgb(255, 0, 0);
+
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 1vw, 3rem);
+
+    margin-inline: auto;
+
+    position: relative;
+    top:0%;
 }
 
