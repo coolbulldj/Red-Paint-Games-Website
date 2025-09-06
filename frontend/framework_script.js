@@ -199,7 +199,9 @@ document.getElementById("ContactButton").onclick = ContactButtonClick;
 let add_to_cart_b = document.querySelectorAll(".framework_box_add_to_cart");
 
 add_to_cart_b.forEach(function(elem) {
-    elem.addEventListener("click", AddToCartButtonClick("Such"));
+    const item_name = elem.parentNode.querySelector(".framework_box_name").innerText
+    alert(item_name)
+    elem.addEventListener("click", AddToCartButtonClick(item_name));
 });
 
 const checkout_button = document.getElementById("CheckoutButton");
