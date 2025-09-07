@@ -6,13 +6,13 @@ const contact_api_url = "/api/contact"
 const purchase_api_url = ""
 
 const AddCartBColors = {
-    [true] : "#ff0000ff",
-    [false] : "#11ff00ff"
+    [true] : "#262626ff",
+    [false] : "#3a3a3aff"
 }
 
 const AddCartBText = {
     [true] : "Remove from cart",
-    [false] : "Add to Cart"    
+    [false] : "Add to Cart!"    
 }
 
 function exit( status ) {
@@ -200,7 +200,6 @@ let add_to_cart_b = document.querySelectorAll(".framework_box_add_to_cart");
 
 add_to_cart_b.forEach(function(elem) {
     const item_name = elem.parentNode.querySelector(".framework_box_name").innerText
-    alert(item_name)
     elem.addEventListener("click", AddToCartButtonClick(item_name));
 });
 

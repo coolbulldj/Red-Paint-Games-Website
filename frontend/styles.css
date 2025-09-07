@@ -813,6 +813,11 @@
     transition: width 0.2s ease-in-out;
 
     margin: 0%;
+
+    display: grid;
+    column-gap: 5%;
+    grid-template-rows: 10% 23% 10%;
+    grid-template-columns: 50% 50%;
 }
 
 /*https://tr.rbxcdn.com/180DAY-887febdd3a4b0ff1e2d97125b0b9b1b2/768/432/Image/Webp/noFilter*/
@@ -824,49 +829,53 @@
 .framework_box.Img1 {
     background-image: url('https://tr.rbxcdn.com/180DAY-887febdd3a4b0ff1e2d97125b0b9b1b2/768/432/Image/Webp/noFilter');
 }
+
 .framework_box.Img2 {
     background-image: url('https://tr.rbxcdn.com/180DAY-c78abd95979e82b4289ece905ce0fa2c/768/432/Image/Webp/noFilter');
 }
+
 .framework_box.Img3 {
     background-image: url('https://tr.rbxcdn.com/180DAY-9ef6700c5904c6d08914370545caa48a/768/432/Image/Webp/noFilter');
 }
+
 .framework_box.Img4 {
     background-image: url('https://tr.rbxcdn.com/180DAY-25b77b4cb49ae9390a08b111a6bff20c/768/432/Image/Webp/noFilter');
 }
 
 .framework_box_add_to_cart {
-    color:aquamarine;
-    background-color: blueviolet;
+    color:rgb(0, 0, 0);
+    background-color: #3a3a3aff;
 
     font-family: sans-serif;
     font-size: clamp(0.5rem, 1.5vw, 3rem);
 
     border-radius: 0.5vw;
-
-
-    position: relative;
-    top:0%;
-    left:65%;
 }
 
 .framework_box_price_range {
     font-family: sans-serif;
     font-size: clamp(0.5rem, 1.5vw, 3rem);
 
-    position: relative;
-    top:5%;
-    left:2%;
+    color:rgb(32, 32, 32);
+    background-color: rgb(71, 71, 71);
+    border-radius: 0.75vw;
+
+    width: 50%;
+
+    border: solid 0.15vw rgb(82, 82, 82);
 }
 
 .framework_box_name {
-    color:rgb(255, 0, 0);
+    color:rgb(58, 58, 58);
+    background-color: rgba(71, 71, 71, 0);
+
+    border-radius: 0.75vw;
+   /* border: solid 0.15vw rgb(82, 82, 82); */
+
+    -webkit-text-stroke: 0.1vw rgb(68, 68, 68);
 
     font-family: sans-serif;
     font-size: clamp(0.5rem, 2.5vw, 3rem);
-
-    position: relative;
-    top:60%;
-    left:2%;
 }
 
 .checkout_page {
