@@ -22,7 +22,7 @@
 }
 
 .user_data_holder {
-    background-color: brown;
+    background-color: rgba(0, 0, 0, 0);
     
     width: 100%;
     height:auto;
@@ -51,17 +51,31 @@
 
     grid-template-rows: 10% 5% 5% 80%;
     grid-template-columns: 40% 53%;
+
+    border-radius: 2vw;
+}
+
+.user_data_mark_read {
+    background-color: rgb(31, 31, 31);
+    color: red;
+
+    border-radius: 0.5vw;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: clamp(0.1rem, 1vw, 3rem);
 }
 
 .user_data_text {
     color:rgb(0, 0, 0);
 
+
+    font-size: clamp(0.1rem, 1vw, 3rem);
     font-family: sans-serif;
 }
 
 .user_data_text.catogory {
-    grid-column-start: 1;
-    grid-column-end: 3;
 }
 
 .user_data_text.discord {
