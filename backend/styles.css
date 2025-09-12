@@ -41,8 +41,46 @@
 
     width: 100%;
     aspect-ratio: 16/9;
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-auto-rows: auto;
+    column-gap: 2%;
+    row-gap: 1%;
+
+    grid-template-rows: 10% 5% 5% 80%;
+    grid-template-columns: 40% 53%;
 }
 
 .user_data_text {
-    color:rgb(255, 255, 255)
+    color:rgb(0, 0, 0);
+
+    font-family: sans-serif;
+}
+
+.user_data_text.catogory {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.user_data_text.discord {
+
+}
+
+.user_data_text.phone {
+
+}
+
+.user_data_text.email {
+
+}
+
+.user_data_text.name {
+    
+}
+
+.user_data_text.message {
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
