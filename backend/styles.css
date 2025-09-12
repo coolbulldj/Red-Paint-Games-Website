@@ -1,0 +1,86 @@
+* {
+  margin: 0;        /* removes default margin */
+  padding: 0;       /* removes default padding */
+  box-sizing: border-box;
+}
+
+.user_data_header {
+    background-color: rgb(0, 0, 0);
+
+    width: 100%;
+    aspect-ratio: 8;
+}
+
+.user_data_title {
+    color:red;
+
+    font-size: clamp(1rem, 4vw, 5rem);
+    font-family: sans-serif;
+
+    display: block;
+    margin-inline: auto;
+}
+
+.user_data_holder {
+    background-color: brown;
+    
+    width: 100%;
+    height:auto;
+
+    /* IN box alignment */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    grid-auto-rows: auto;
+    gap:2%;
+    row-gap: 5%;
+}
+
+.user_data_box {
+    background-color: aquamarine;
+
+    width: 100%;
+    aspect-ratio: 16/9;
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-auto-rows: auto;
+    column-gap: 2%;
+    row-gap: 1%;
+
+    grid-template-rows: 10% 5% 5% 80%;
+    grid-template-columns: 40% 53%;
+}
+
+.user_data_text {
+    color:rgb(0, 0, 0);
+
+    font-family: sans-serif;
+}
+
+.user_data_text.catogory {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.user_data_text.discord {
+
+}
+
+.user_data_text.phone {
+
+}
+
+.user_data_text.email {
+
+}
+
+.user_data_text.name {
+    
+}
+
+.user_data_text.message {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
