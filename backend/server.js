@@ -103,10 +103,14 @@ app.post('/api/contact', (req, res) => {
     return res.sendStatus(200);
 })
 
-app.get('/api/users/:password', (req, res) => {
-    console.log(req.params)
+app.get('/userdb', (req, res) => {
+    res.sendFile(path.join(frontend_path, 'userdata.html'))
+})
 
-    if (req.params.password !== 'current_password') {
+app.post('/api/users', (req, res) => {
+    
+
+    if (req.body.password !== 'current_password') {
         return res.sendStatus(403);
     }
 
