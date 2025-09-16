@@ -116,7 +116,7 @@ app.get('/userdb', (req, res) => {
 app.post('/api/users', (req, res) => {
     const sql = 'SELECT * FROM userdata'
 
-    if (req.body.password !== 'current_password') {
+    if (req.body.password !== 'ThePasswordBallers') {
         return res.sendStatus(403);
     }
 
