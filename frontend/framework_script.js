@@ -125,8 +125,15 @@ function AddCheckoutElement(item_name) {
     framework_name.className = "checkout_cart_item_name";
     framework_name.innerText = item_name;
 
+    const remove_button = document.createElement("button");
+    remove_button.className = "framework_box_add_to_cart";
+    remove_button.innerText = "Remove from cart";
+
     //Add framework name to the checkout item
     checkout_framework.appendChild(framework_name);
+
+    //Add remove button to the checkout item
+    checkout_framework.appendChild(remove_button);
 
     //Add the checkout item to the checkout list
     checkout_list.appendChild(checkout_framework);
