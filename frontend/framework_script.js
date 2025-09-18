@@ -164,7 +164,6 @@ function AddToCartButtonClick(item_name) {
 function OnCheckout() {
     alert('Checking out!');
     alert(cart);
-    
 }
 
 
@@ -190,6 +189,11 @@ function InstagramRedirect() {
     window.open("https://www.instagram.com/redpaintgames/", "_blank");
 }
 
+function PlayHoverSound() {
+    const hover_sound = new Audio("../assets/sounds/HoverSound.mp3");
+    hover_sound.play();
+}
+
 // Assign the functions to the buttons
 
 document.getElementById("HomeButton").onclick = HomeButtonClick;
@@ -206,6 +210,35 @@ add_to_cart_b.forEach(function(elem) {
 const checkout_button = document.getElementById("CheckoutButton");
 
 checkout_button.onclick = OnCheckout;
+
+const TDSB = document.querySelector(".framework_box.Img1");
+const ASGB = document.querySelector(".framework_box.Img2");
+const FPSB = document.querySelector(".framework_box.Img3")
+const CLGB = document.querySelector(".framework_box.Img4");
+
+//These buttons should link to videos about how to use the frameworks
+
+TDSB.addEventListener("click", function() {
+    alert("You clicked the Avatar Shopping Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+ASGB.addEventListener("click", function() {
+    alert("You clicked the Tower Defense Simulator Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+FPSB.addEventListener("click", function() {
+    alert("You clicked the FPS Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+CLGB.addEventListener("click", function() {
+    alert("You clicked the Collection Simulator Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+
 
 document.getElementById("TwitterIcon").onclick = TwitterRedirect;
 document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
