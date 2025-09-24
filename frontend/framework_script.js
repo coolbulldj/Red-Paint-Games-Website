@@ -129,6 +129,10 @@ function AddCheckoutElement(item_name) {
     remove_button.className = "framework_box_add_to_cart";
     remove_button.innerText = "Remove from cart";
 
+    remove_button.addEventListener("click", () => {
+        checkout_framework.remove();
+    })
+
     //Add framework name to the checkout item
     checkout_framework.appendChild(framework_name);
 
@@ -147,21 +151,22 @@ let cart = []
 
 function AddToCartButtonClick(item_name) {
     return function(elem) {
+        elem.stopPropagation(); //this prevents the elem from behind from firing
         const cart_b = elem.currentTarget;
 
         const checkout_element = document.getElementById(item_name+"_checkout_item");
-        //check if item already exists
+        //check if item already exists, stuff bottem is commented out because we want to only be able to remove the elem from the cart area.
         if (checkout_element) {
         
-            cart_b.textContent  = AddCartBText[false];
-            cart_b.style.backgroundColor = AddCartBColors[false];
+            //cart_b.textContent  = AddCartBText[false];
+            //cart_b.style.backgroundColor = AddCartBColors[false];
 
-            RemoveCheckoutElement(checkout_element);
+            //RemoveCheckoutElement(checkout_element);
             return;
         } 
         //Redesign button
-        cart_b.textContent  = AddCartBText[true];
-        cart_b.style.backgroundColor = AddCartBColors[true];
+        //cart_b.textContent  = AddCartBText[true];
+       // cart_b.style.backgroundColor = AddCartBColors[true];
 
         cart.splice(0, 0, item_name);
         AddCheckoutElement(item_name);

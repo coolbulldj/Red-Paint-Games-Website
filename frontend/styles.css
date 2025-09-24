@@ -850,6 +850,10 @@
     font-size: clamp(0.5rem, 1.5vw, 3rem);
 
     border-radius: 0.5vw;
+
+    pointer-events: auto;
+
+    z-index: 3;
 }
 
 .framework_box_price_range {
