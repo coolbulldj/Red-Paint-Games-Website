@@ -1,16 +1,17 @@
 const base_url = window.location.origin;
 const userdb_url = base_url + '/api/users';
 
-async function getUserData() {
+async function getUserData(given_password) {
 
     const userdata = await fetch(userdb_url, {
         method: "POST",
-        body: JSON.stringify({ password: 'current_password' }),
+        body: JSON.stringify({ password:  given_password}),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
     const result = await userdata.json();
+
     return result
 }
 
@@ -42,11 +43,11 @@ function createUserDataBlock(Catogory, Read, Name, Phone, Discord, Email, Messag
     const UserDataBox = document.createElement("div");
     UserDataBox.id = Name;
     UserDataBox.className = "user_data_box";
-
+    alert(Read);
     //Header
     createTextElement("user_data_text catogory", "Catogory: "+Catogory, UserDataBox);
     //Button
-    createButtonElement("user_data_mark_read", Read, UserDataBox);
+    createButtonElement("user_data_mark_read", toString(Read), UserDataBox);
     //Name
     createTextElement("user_data_text name", "Name:"+Name, UserDataBox);
     //Discord
@@ -62,21 +63,22 @@ function createUserDataBlock(Catogory, Read, Name, Phone, Discord, Email, Messag
     UserDataHolder.appendChild(UserDataBox);
 }
 
-alert('start');
+//Set up login connections
+const LoginB = document.getElementById("LoginB");
+const PasswordInput = document.getElementById("PasswordBox");
 
-getUserData().then(user_data => {
-    alert(user_data.JSON)
-    user_data.forEach(element => {
-        alert(element.Message);
-
-        createUserDataBlock(
-            element.Category,
-            element.Read,
-            element.Name,
-            element.Phone,
-            element.Discord,
-            element.Email,
-            element.Message
-        );
+LoginB.addEventListener("click", () => {
+    getUserData(PasswordInput.value).then(user_data => {
+        user_data.forEach(element => {
+            createUserDataBlock(
+                element.type,
+                element.read,
+                element.name,
+                element.phone,
+                element.discord,
+                element.email,
+                element.message
+            );
+        });
     });
-});
+})

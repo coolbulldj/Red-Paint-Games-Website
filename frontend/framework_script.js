@@ -125,8 +125,15 @@ function AddCheckoutElement(item_name) {
     framework_name.className = "checkout_cart_item_name";
     framework_name.innerText = item_name;
 
+    const remove_button = document.createElement("button");
+    remove_button.className = "framework_box_add_to_cart";
+    remove_button.innerText = "Remove from cart";
+
     //Add framework name to the checkout item
     checkout_framework.appendChild(framework_name);
+
+    //Add remove button to the checkout item
+    checkout_framework.appendChild(remove_button);
 
     //Add the checkout item to the checkout list
     checkout_list.appendChild(checkout_framework);
@@ -164,7 +171,6 @@ function AddToCartButtonClick(item_name) {
 function OnCheckout() {
     alert('Checking out!');
     alert(cart);
-    
 }
 
 
@@ -190,6 +196,11 @@ function InstagramRedirect() {
     window.open("https://www.instagram.com/redpaintgames/", "_blank");
 }
 
+function PlayHoverSound() {
+    const hover_sound = new Audio("../assets/sounds/HoverSound.mp3");
+    hover_sound.play();
+}
+
 // Assign the functions to the buttons
 
 document.getElementById("HomeButton").onclick = HomeButtonClick;
@@ -206,6 +217,35 @@ add_to_cart_b.forEach(function(elem) {
 const checkout_button = document.getElementById("CheckoutButton");
 
 checkout_button.onclick = OnCheckout;
+
+const TDSB = document.querySelector(".framework_box.Img1");
+const ASGB = document.querySelector(".framework_box.Img2");
+const FPSB = document.querySelector(".framework_box.Img3")
+const CLGB = document.querySelector(".framework_box.Img4");
+
+//These buttons should link to videos about how to use the frameworks
+
+TDSB.addEventListener("click", function() {
+    alert("You clicked the Avatar Shopping Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+ASGB.addEventListener("click", function() {
+    alert("You clicked the Tower Defense Simulator Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+FPSB.addEventListener("click", function() {
+    alert("You clicked the FPS Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+CLGB.addEventListener("click", function() {
+    alert("You clicked the Collection Simulator Game box!");
+    window.open("https://www.youtube.com", "_blank");
+});
+
+
 
 document.getElementById("TwitterIcon").onclick = TwitterRedirect;
 document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
