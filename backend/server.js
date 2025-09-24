@@ -8,14 +8,19 @@ const db = new sqlite3.Database('./backend/userdata.db', sqlite3.OPEN_READWRITE,
     console.log("database connection successful")
 })
 
-/*  db.run('CREATE TABLE userdata(email, name, discord, phone, ip, message, type)')
+db.serialize(() => {
+    db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='userdata'", (err, row) => {
+        if (err) {  
+            console.error("Error checking table existence:", err.message);
+        } else if (row) {
+            console.log("db already exists")
+        } else {
+           db.run('CREATE TABLE userdata(email, name, discord, phone, ip, message, type, read)')
+        }
+    })
+})
 
-const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type)
-VALUES(?,?,?,?,?,?,?)`;  */
-
-const sql = 'SELECT * FROM userdata'
-
-/*
+/* const sql = 'SELECT * FROM userdata'
 db.run(
     sql, 
     [
@@ -35,8 +40,8 @@ db.run(
 
 //Update data
 function AddData(data) {
-    const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type)
-VALUES(?,?,?,?,?,?,?)`;
+    const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type, read)
+VALUES(?,?,?,?,?,?,?,?)`;
 
     db.run(
         sql, 
@@ -86,6 +91,8 @@ app.post('/api/contact', (req, res) => {
 
     const ip = req.ip;
 
+    if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
+
     AddData([
         req_body.email,
         req_body.name,
@@ -94,11 +101,10 @@ app.post('/api/contact', (req, res) => {
         ip,
         req_body.message,
         "contact",
+        false, //This is the boolean on whether the data has been read
     ])
 
-    if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
-
-    PrintOffDb();
+    //PrintOffDb();
 
     return res.sendStatus(200);
 })
@@ -108,9 +114,9 @@ app.get('/userdb', (req, res) => {
 })
 
 app.post('/api/users', (req, res) => {
-    
+    const sql = 'SELECT * FROM userdata'
 
-    if (req.body.password !== 'current_password') {
+    if (req.body.password !== 'ThePasswordBallers') {
         return res.sendStatus(403);
     }
 
