@@ -114,7 +114,7 @@ function SubmitButtonClick() {
     })
 }
 
-function AddCheckoutElement(item_name) {
+function AddCheckoutElement(item_name, image_url) {
     const checkout_list = document.getElementById("CheckoutList");
 
     const checkout_framework = document.createElement("div");
@@ -133,11 +133,13 @@ function AddCheckoutElement(item_name) {
         checkout_framework.remove();
     })
 
-    //Add framework name to the checkout item
-    checkout_framework.appendChild(framework_name);
+    checkout_framework.style.backgroundImage = image_url
 
     //Add remove button to the checkout item
     checkout_framework.appendChild(remove_button);
+
+    //Add framework name to the checkout item
+    checkout_framework.appendChild(framework_name);
 
     //Add the checkout item to the checkout list
     checkout_list.appendChild(checkout_framework);
@@ -149,7 +151,7 @@ function RemoveCheckoutElement(elem) {
 
 let cart = []
 
-function AddToCartButtonClick(item_name) {
+function AddToCartButtonClick(item_name, image_url) {
     return function(elem) {
         elem.stopPropagation(); //this prevents the elem from behind from firing
         const cart_b = elem.currentTarget;
@@ -169,7 +171,7 @@ function AddToCartButtonClick(item_name) {
        // cart_b.style.backgroundColor = AddCartBColors[true];
 
         cart.splice(0, 0, item_name);
-        AddCheckoutElement(item_name);
+        AddCheckoutElement(item_name, image_url);
     }
 }
 
@@ -216,7 +218,9 @@ let add_to_cart_b = document.querySelectorAll(".framework_box_add_to_cart");
 
 add_to_cart_b.forEach(function(elem) {
     const item_name = elem.parentNode.querySelector(".framework_box_name").innerText
-    elem.addEventListener("click", AddToCartButtonClick(item_name));
+
+    let computedStyle = window.getComputedStyle(elem.parentNode);
+    elem.addEventListener("click", AddToCartButtonClick(item_name, computedStyle.backgroundImage));
 });
 
 const checkout_button = document.getElementById("CheckoutButton");
