@@ -1,5 +1,7 @@
 const express = require('express');
 
+const cookieParser = require('cookie-parser');
+
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('./backend/userdata.db', sqlite3.OPEN_READWRITE, (err) => {
@@ -72,19 +74,51 @@ function CloseDB() {
 
 const bodyParser = require('body-parser')
 const path = require('path');
+const { randomUUID } = require('crypto');
 const app = express();
 
 const frontend_path = path.join(__dirname, "..", "frontend");
 
 app.use(
     express.json(),
-    express.static(frontend_path)
+    express.static(frontend_path),
+    cookieParser()
 )
 
+function verifyUserAgreement(req, res) {
+    let deviceId = req.cookies.deviceId;
+
+    if (!deviceId) {
+        return false;
+    }
+    return true;
+}
 
 app.get('/', (req, res) => {
+    const isAgreed = verifyUserAgreement(req, res);
+    if (!isAgreed) {
+        res.sendFile(path.join(frontend_path, 'UserAgreement.html'));
+        return;
+    }
     res.sendFile(path.join(frontend_path, 'home.html'));
 })
+
+app.post('/api/verifyUserAgreement', (req, res) => {
+    console.log("Verifying user agreement")
+    let deviceId = req.cookies.deviceId;
+    if (!deviceId) {
+        const UUID = uuidv4();
+        console.log(UUID);
+
+        res.cookie('deviceId', UUID, { 
+            maxAge: 900000, 
+            httpOnly: true, 
+            secure: true,
+            sameSite: 'strict'
+        });
+    }
+    console.log("User agreement verified", deviceId)
+});
 
 app.post('/api/contact', (req, res) => {
     const req_body = req.body;
