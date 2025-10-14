@@ -74,8 +74,10 @@ function CloseDB() {
 
 const bodyParser = require('body-parser')
 const path = require('path');
-const { randomUUID } = require('crypto');
 const app = express();
+
+const UserAgreementVersion = "v1"; //Increase this value anytime the user agreement changes
+
 
 const frontend_path = path.join(__dirname, "..", "frontend");
 
@@ -86,9 +88,9 @@ app.use(
 )
 
 function verifyUserAgreement(req, res) {
-    let deviceId = req.cookies.deviceId;
+    const AgreementVersion = req.cookies.AgreementVersion;
 
-    if (!deviceId) {
+    if (!AgreementVersion || AgreementVersion != UserAgreementVersion) {
         return false;
     }
     return true;
@@ -96,6 +98,8 @@ function verifyUserAgreement(req, res) {
 
 app.get('/', (req, res) => {
     const isAgreed = verifyUserAgreement(req, res);
+    console.log("User is agreed?:", isAgreed)
+    console.log("Users cookies is:", req.cookies)
     if (!isAgreed) {
         res.sendFile(path.join(frontend_path, 'UserAgreement.html'));
         return;
@@ -105,19 +109,17 @@ app.get('/', (req, res) => {
 
 app.post('/api/verifyUserAgreement', (req, res) => {
     console.log("Verifying user agreement")
-    let deviceId = req.cookies.deviceId;
-    if (!deviceId) {
-        const UUID = uuidv4();
-        console.log(UUID);
-
-        res.cookie('deviceId', UUID, { 
-            maxAge: 900000, 
-            httpOnly: true, 
-            secure: true,
-            sameSite: 'strict'
-        });
+    let AgreementVersion = req.cookies.AgreementVersion;
+    if (!AgreementVersion || AgreementVersion != UserAgreementVersion) {
+        res.cookie(
+            'AgreementVersion',
+            UserAgreementVersion, 
+            { maxAge: 900000, httpOnly: true }
+        )
     }
-    console.log("User agreement verified", deviceId)
+    console.log("User agreement verified", UserAgreementVersion)
+    console.log("User cookies:", req.cookies)
+    res.send()
 });
 
 app.post('/api/contact', (req, res) => {
