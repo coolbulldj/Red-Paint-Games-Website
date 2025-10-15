@@ -13,6 +13,8 @@ const email_input = document.getElementById('EmailInput')
 const discord_input = document.getElementById('DiscordInput')
 const phone_number_input = document.getElementById('PhoneInput')
 
+const hoverUrls = {}
+
 
 
 function HomeButtonClick() {
