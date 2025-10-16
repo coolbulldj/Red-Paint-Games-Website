@@ -2,21 +2,25 @@
     {
         "name":"Avatar Shopping",
         "youtube_url":"",
-        "price_string":"10$-20$"
+        "price_string":"10$-20$",
+        "image_url": "'https://substackcdn.com/image/fetch/$s_!CZ6T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01e1bff6-8394-4067-a29a-4a6c3ab71898_2618x1448.png'"
     },
     {
         "name":"Tower Defense",
         "youtube_url":"",
-        "price_string":"10$-20$"
+        "price_string":"10$-20$",
+        "image_url": ""
     },
     {
         "name":"Obby",
         "youtube_url":"",
-        "price_string":"10$-20$"
+        "price_string":"10$-20$",
+        "image_url": ""
     },
     {
         "name":"Hire a ____",
         "youtube_url":"",
-        "price_string":"10$-20$"
+        "price_string":"10$-20$",
+        "image_url": ""
     }
 ]

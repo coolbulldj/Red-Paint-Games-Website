@@ -114,6 +114,40 @@ function SubmitButtonClick() {
     })
 }
 
+const FrameworkHolder = document.getElementById("frameworks_holder");
+//alert("f");
+
+function AddPurchaseElement(data) {
+    const purchaseFrame = document.createElement("div");
+    purchaseFrame.className = "framework_box";
+
+    const price_range_label = document.createElement("p");
+    price_range_label.className = "framework_box_price_range";
+
+    const framework_name = document.createElement("p");
+    framework_name.innerHTML = data.name
+    framework_name.className = "framework_box_name";
+
+    const add_to_cart_b = document.createElement("button");
+    add_to_cart_b.className = "framework_box_add_to_cart";
+
+    purchaseFrame.appendChild(price_range_label);
+    purchaseFrame.appendChild(framework_name);
+    purchaseFrame.appendChild(add_to_cart_b);
+
+    purchaseFrame.style.backgroundImage = "url('"+ data.image_url + "')"
+
+    FrameworkHolder.appendChild(purchaseFrame);
+}
+
+fetch('/framework_games.json')
+.then(res => res.json())
+.then(data => {
+    data.forEach(item => {
+        AddPurchaseElement(item);
+    })
+})
+
 function AddCheckoutElement(item_name, image_url) {
     const checkout_list = document.getElementById("CheckoutList");
 
