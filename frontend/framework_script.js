@@ -116,38 +116,6 @@ function SubmitButtonClick() {
 
 const FrameworkHolder = document.getElementById("frameworks_holder");
 //alert("f");
-
-function AddPurchaseElement(data) {
-    const purchaseFrame = document.createElement("div");
-    purchaseFrame.className = "framework_box";
-
-    const price_range_label = document.createElement("p");
-    price_range_label.className = "framework_box_price_range";
-
-    const framework_name = document.createElement("p");
-    framework_name.innerHTML = data.name
-    framework_name.className = "framework_box_name";
-
-    const add_to_cart_b = document.createElement("button");
-    add_to_cart_b.className = "framework_box_add_to_cart";
-
-    purchaseFrame.appendChild(price_range_label);
-    purchaseFrame.appendChild(framework_name);
-    purchaseFrame.appendChild(add_to_cart_b);
-
-    purchaseFrame.style.backgroundImage = "url('"+ data.image_url + "')"
-
-    FrameworkHolder.appendChild(purchaseFrame);
-}
-
-fetch('/framework_games.json')
-.then(res => res.json())
-.then(data => {
-    data.forEach(item => {
-        AddPurchaseElement(item);
-    })
-})
-
 function AddCheckoutElement(item_name, image_url) {
     const checkout_list = document.getElementById("CheckoutList");
 
@@ -160,7 +128,7 @@ function AddCheckoutElement(item_name, image_url) {
     framework_name.innerText = item_name;
 
     const remove_button = document.createElement("button");
-    remove_button.className = "framework_box_add_to_cart";
+    remove_button.className = "checkout_remove_from_cart";
     remove_button.innerText = "Remove from cart";
 
     remove_button.addEventListener("click", () => {
@@ -177,10 +145,6 @@ function AddCheckoutElement(item_name, image_url) {
 
     //Add the checkout item to the checkout list
     checkout_list.appendChild(checkout_framework);
-}
-
-function RemoveCheckoutElement(elem) { 
-    elem.remove();
 }
 
 let cart = []
@@ -208,6 +172,48 @@ function AddToCartButtonClick(item_name, image_url) {
         AddCheckoutElement(item_name, image_url);
     }
 }
+
+function AddPurchaseElement(data) {
+    const purchaseFrame = document.createElement("div");
+    purchaseFrame.className = "framework_box";
+
+    const price_range_label = document.createElement("p");
+    price_range_label.innerHTML = data.price_string
+    price_range_label.className = "framework_box_price_range";
+
+    const framework_name = document.createElement("p");
+    framework_name.innerHTML = data.name
+    framework_name.className = "framework_box_name";
+
+    const add_to_cart_b = document.createElement("button");
+    add_to_cart_b.innerHTML = "Add to Cart"
+    add_to_cart_b.className = "framework_box_add_to_cart";
+
+    purchaseFrame.appendChild(price_range_label);
+    purchaseFrame.appendChild(framework_name);
+    purchaseFrame.appendChild(add_to_cart_b);
+
+    const urlString = 'url(' + data.image_url + ')';
+    purchaseFrame.style.backgroundImage = urlString
+
+    add_to_cart_b.addEventListener("click", AddToCartButtonClick(data.name, urlString))
+
+    FrameworkHolder.appendChild(purchaseFrame);
+}
+
+fetch('/framework_games.json')
+.then(res => res.json())
+.then(data => {
+    data.forEach(item => {
+        AddPurchaseElement(item);
+    })
+})
+
+function RemoveCheckoutElement(elem) { 
+    elem.remove();
+}
+
+
 
 function OnCheckout() {
     alert('Checking out!');
@@ -248,46 +254,11 @@ document.getElementById("HomeButton").onclick = HomeButtonClick;
 
 document.getElementById("ContactButton").onclick = ContactButtonClick;
 
-let add_to_cart_b = document.querySelectorAll(".framework_box_add_to_cart");
-
-add_to_cart_b.forEach(function(elem) {
-    const item_name = elem.parentNode.querySelector(".framework_box_name").innerText
-
-    let computedStyle = window.getComputedStyle(elem.parentNode);
-    elem.addEventListener("click", AddToCartButtonClick(item_name, computedStyle.backgroundImage));
-});
-
 const checkout_button = document.getElementById("CheckoutButton");
 
 checkout_button.onclick = OnCheckout;
 
-const TDSB = document.querySelector(".framework_box.Img1");
-const ASGB = document.querySelector(".framework_box.Img2");
-const FPSB = document.querySelector(".framework_box.Img3")
-const CLGB = document.querySelector(".framework_box.Img4");
-
 //These buttons should link to videos about how to use the frameworks
-
-TDSB.addEventListener("click", function() {
-    alert("You clicked the Avatar Shopping Game box!");
-    window.open("https://www.youtube.com", "_blank");
-});
-
-ASGB.addEventListener("click", function() {
-    alert("You clicked the Tower Defense Simulator Game box!");
-    window.open("https://www.youtube.com", "_blank");
-});
-
-FPSB.addEventListener("click", function() {
-    alert("You clicked the FPS Game box!");
-    window.open("https://www.youtube.com", "_blank");
-});
-
-CLGB.addEventListener("click", function() {
-    alert("You clicked the Collection Simulator Game box!");
-    window.open("https://www.youtube.com", "_blank");
-});
-
 
 
 document.getElementById("TwitterIcon").onclick = TwitterRedirect;
