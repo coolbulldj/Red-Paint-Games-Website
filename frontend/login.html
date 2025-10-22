@@ -9,13 +9,15 @@
     <body>
         <div class = "main_login">
             <h1 class = "login_title">Sign in to Red Paint Games</h1>
-            <input class = "input_box username" type="text" placeholder="Username">
-            <input class = "input_box password" type="password" placeholder="Password">
-            <button class = "main_b">Sign In</button>
-            <button class = "sub_b">
+            <input class = "input_box username" type="text" placeholder="Username" id = "username_input">
+            <input class = "input_box password" type="password" placeholder="Password" id = "password_input">
+            <button class = "main_b" id = "main_b">Sign In</button>
+            <button class = "sub_b" id = "sub_b">
                 Don't have an account	‍    
                 <mark class = "red_mark"> Sign Up Now</mark>
             </button>
+            <p class ="requirements_label" id = "notification_label"></p>
         </div>
     </body>
+    <script src="login.js"></script>
 </html>

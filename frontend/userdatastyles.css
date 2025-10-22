@@ -117,24 +117,6 @@
     font-family: sans-serif;
 }
 
-.user_data_text.catogory {
-}
-
-.user_data_text.discord {
-
-}
-
-.user_data_text.phone {
-
-}
-
-.user_data_text.email {
-
-}
-
-.user_data_text.name {
-    
-}
 
 .user_data_text.message {
     grid-column-start: 1;

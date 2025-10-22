@@ -55,7 +55,7 @@
     border-radius: 1.5vw;
 
     font-family: "Inter", Helvetica, Arial, sans-serif;
-    font-size: clamp(0.5rem, 4vw, 1rem);
+    font-size: clamp(0.5rem, 4vw, 2rem);
 }
 
 .input_box::placeholder {
@@ -96,7 +96,15 @@
     font-size: clamp(0.5rem, 1.5vw, 2rem);
 
     position: relative;
-    top:30%
+    top:30%;
+
+    transition: width 0.3s ease;
+}
+
+.main_b:hover {
+    cursor: pointer;
+
+    width: 57%;
 }
 
 .sub_b {
@@ -124,7 +132,36 @@
     top:35%
 }
 
+.sub_b:hover {
+    cursor: pointer;
+}
+
 .red_mark {
     background-color: rgba(0, 0, 0, 0);
     color: rgb(255, 0, 0);
+}
+
+.requirements_label {
+     background-color: rgba(0, 0, 0, 0);
+    color:rgb(255, 0, 0);
+
+    width: 55%;
+    aspect-ratio: 10;
+
+    display: flex;
+    margin: 0 auto;
+
+    border: none black 0.1vw;
+    border-radius: 2vw;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.5rem, 1vw, 2rem);
+
+    position: relative;
+    top:40%
 }
