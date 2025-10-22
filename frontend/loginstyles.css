@@ -1,0 +1,130 @@
+* {
+  margin: 0;        /* removes default margin */
+  padding: 0;       /* removes default padding */
+  box-sizing: border-box;
+}
+
+.main_login {
+    background-color: rgb(255, 255, 255);
+
+    height: 95vh;
+    width: 50vw;
+
+    margin-inline: auto;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: solid rgb(241, 241, 241) 0.5vw;
+    border-radius: 2vw;
+}
+
+.login_title {
+    text-align: center;
+
+    font-size: 3vw;
+
+    margin-inline: auto;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+
+    position: relative;
+    top:10%
+}
+
+.input_description {
+    text-align: center;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.input_box {
+    background-color: rgb(243, 243, 243);
+    color:rgb(161,161,161);
+
+    width: 60%;
+    aspect-ratio: 8;
+
+    display: flex;
+    margin-inline: auto;
+
+    border: none rgb(197, 197, 197) 0.1vw;
+    border-radius: 1.5vw;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-size: clamp(0.5rem, 4vw, 1rem);
+}
+
+.input_box::placeholder {
+    color:rgb(161,161,161);
+    position:relative;
+    left:5%;
+}
+
+.input_box.username {
+    position: relative;
+    top:20%
+}
+
+.input_box.password {
+    position: relative;
+    top:25%
+}
+
+.main_b {
+    background-color: rgb(255, 0, 0);
+    color:white;
+
+    width: 55%;
+    aspect-ratio: 7.5;
+
+    display: flex;
+    margin: 0 auto;
+
+    border: none black 0.1vw;
+    border-radius: 2vw;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.5rem, 1.5vw, 2rem);
+
+    position: relative;
+    top:30%
+}
+
+.sub_b {
+    background-color: rgba(0, 0, 0, 0);
+    color:rgb(161,161,161);
+
+    width: 55%;
+    aspect-ratio: 10;
+
+    display: flex;
+    margin: 0 auto;
+
+    border: none black 0.1vw;
+    border-radius: 2vw;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.5rem, 1vw, 2rem);
+
+    position: relative;
+    top:35%
+}
+
+.red_mark {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 0, 0);
+}

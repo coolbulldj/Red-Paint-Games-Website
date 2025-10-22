@@ -87,6 +87,7 @@ function InstagramRedirect() {
     window.open("https://www.instagram.com/redpaintgames/", "_blank");
 }
 
+
 // Assign the functions to the buttons
 
 document.getElementById("HomeButton").onclick = HomeButtonClick;
@@ -96,6 +97,8 @@ document.getElementById("ContactButton").onclick = ContactButtonClick;
 document.getElementById("DevTeamButton").onclick = DevTeamButtonClick;
 
 document.getElementById("FrameworksButton").onclick = FrameworksButtonClick;
+document.getElementById("MenuFrameworkButton").onclick = FrameworksButtonClick;
+document.getElementById("LoginButton").onclick = FrameworksButtonClick;
 
 document.getElementById("GamesButton").onclick = GamesButtonClick;
 
