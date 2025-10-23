@@ -4,6 +4,10 @@ const cookieParser = require('cookie-parser');
 
 const sqlite3 = require('sqlite3').verbose();
 
+const fs = require('fs')
+
+const download_folder_url = './downloads'
+
 const db = new sqlite3.Database('./backend/userdata.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) return console.error(err.message);
 
@@ -191,6 +195,42 @@ app.post('/api/get_owned_frameworks', (req, res) => {
     }
     console.log(user_data.owned_frameworks)
     res.json(user_data.owned_frameworks)
+})
+
+app.post('/api/download', (req, res) => {
+    const body = req.body
+
+    //Verify Login
+
+    if (!test_account_list.has(body.username)) {
+        res.send("Invalid username")
+        return
+    }
+
+    const user_data = test_account_list.get(body.username)
+
+     if (user_data.password != body.password) {
+        res.send("Invalid password")
+        return
+    }
+
+    if (!user_data.owned_frameworks.includes(user_data.download_name)) {
+        return
+    }
+
+    const filePath = download_folder_url + user_data.download_name
+
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).send("File not found");
+    }
+
+    // Send file for download
+    res.download(filePath, filename, err => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error downloading file");
+        }
+    });
 })
 
 app.post('/api/contact', (req, res) => {
