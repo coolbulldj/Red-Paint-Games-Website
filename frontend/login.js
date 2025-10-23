@@ -28,8 +28,8 @@ function verifyLogin() {
     .then(response => response.text())
     .then(text => {
         if (!text) {
-            sessionStorage.setItem("username", UsernameElem.value)
-            sessionStorage.setItem("password", PasswordElem.value)
+            localStorage.setItem("username", UsernameElem.value)
+            localStorage.setItem("password", PasswordElem.value)
             window.location.replace(home_url)
         }
         NoteLabel.innerHTML = text

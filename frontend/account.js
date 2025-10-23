@@ -1,37 +1,59 @@
 const FrameworkHolder = document.getElementById("frameworks_holder");
 //alert("f");
-function AddDownloadElement(item_name, image_url) {
-    const checkout_list = document.getElementById("CheckoutList");
+const downloadAPI_URL = 'typeshittt'
+const LoginB = document.getElementById("login_button")
 
-    const checkout_framework = document.createElement("div");
-    checkout_framework.id = item_name+"_checkout_item";
-    checkout_framework.className = "checkout_cart_item";
+function DownloadElem(name) {
+    const password = localStorage.getItem("password")
+    const username = localStorage.getItem("username")
 
-    const framework_name = document.createElement("p");
-    framework_name.className = "checkout_cart_item_name";
-    framework_name.innerText = item_name;
-
-    const remove_button = document.createElement("button");
-    remove_button.className = "checkout_remove_from_cart";
-    remove_button.innerText = "Remove from cart";
-
-    remove_button.addEventListener("click", () => {
-        checkout_framework.remove();
-    })
-
-    checkout_framework.style.backgroundImage = image_url
-
-    //Add remove button to the checkout item
-    checkout_framework.appendChild(remove_button);
-
-    //Add framework name to the checkout item
-    checkout_framework.appendChild(framework_name);
-
-    //Add the checkout item to the checkout list
-    checkout_list.appendChild(checkout_framework);
+    console.log(password, username)
 }
 
-const url =  window.location.origin   + "/api/get_owned_frameworks"
+function AddDownloadElement(data, name) {
+    const purchaseFrame = document.createElement("div");
+    purchaseFrame.className = "framework_box";
+
+    const downloadB = document.createElement("button");
+    downloadB.innerHTML = "Download"
+    downloadB.className = "download_b";
+
+    const framework_name = document.createElement("p");
+    framework_name.innerHTML = name
+    framework_name.className = "framework_box_name";
+
+
+    purchaseFrame.appendChild(downloadB);
+    purchaseFrame.appendChild(framework_name);
+
+
+    const urlString = 'url(' + data.image_url + ')';
+    purchaseFrame.style.backgroundImage = urlString
+
+    downloadB.onclick = function() {
+        DownloadElem(name)
+    }
+
+    FrameworkHolder.appendChild(purchaseFrame);
+}
+
+function LoadOwnedFrameworks(data) {
+    fetch('/framework_games.json')
+    .then(res => res.json())
+    .then(framework_data => {
+        data.forEach(name => {
+            const value = framework_data[name]
+            
+            if (!value) {
+                return
+            }
+
+            AddDownloadElement(value, name)
+        })
+    })
+}
+
+const url =  window.location.origin + "/api/get_owned_frameworks"
 
 fetch(url, {
     method: "POST",
@@ -43,14 +65,22 @@ fetch(url, {
         "Content-type": "application/json; charset=UTF-8"
     }
 }).then(response => {
-    if (!response.ok) {
-        console.log("teslse")
-        return {}
+    if (response.status != 200) {
+        alert("not ok")
+        return [
+            "Obby"
+        ]
     }
+
     return response.json();
 })
 .then(response => {
-    console.log("fdf")
-    alert(response);
+    LoadOwnedFrameworks(response);
+})
+.catch(err => {
+    console.log(err)
 })
 
+LoginB.onclick = function() {
+    window.location.replace('/login.html')
+}

@@ -179,16 +179,18 @@ app.post('/api/get_owned_frameworks', (req, res) => {
     const body = req.body
 
     if (!test_account_list.has(body.username)) {
+        res.sendStatus(204)
         return
     }
 
     const user_data = test_account_list.get(body.username)
 
      if (user_data.password != body.password) {
+        res.sendStatus(204)
         return
     }
-
-    res.sendStatus(200).json(user_data.owned_frameworks)
+    console.log(user_data.owned_frameworks)
+    res.json(user_data.owned_frameworks)
 })
 
 app.post('/api/contact', (req, res) => {

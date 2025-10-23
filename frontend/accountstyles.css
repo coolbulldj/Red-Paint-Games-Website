@@ -1,0 +1,48 @@
+
+.login_button {
+    background-color: rgb(31, 31, 31);
+
+    border: solid 0.15vw rgb(42, 42, 42);
+    border-radius: 1vw;
+
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 10%;
+    position: relative;
+    margin-inline: auto;
+}
+
+.login_button:hover {
+    color: rgb(255, 0, 0);
+}
+
+.download_b {
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 1.5vw, 3rem);
+    font-weight: 550;
+
+    color:rgb(255, 255, 255);
+    background-color: rgb(109, 109, 109);
+    border-radius: 0.75vw;
+    /*border: solid 0.15vw rgb(82, 82, 82); */
+    border: none;
+
+    width: 30%;
+    height: 45%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    left:2%;
+    top:10%;
+}
+
+.download_b:hover {
+    cursor: pointer;
+}

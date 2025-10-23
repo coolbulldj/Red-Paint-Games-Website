@@ -142,7 +142,7 @@ function AddToCartButtonClick(item_name, image_url) {
     }
 }
 
-function AddPurchaseElement(data) {
+function AddPurchaseElement(data, name) {
     const purchaseFrame = document.createElement("div");
     purchaseFrame.className = "framework_box";
 
@@ -151,7 +151,7 @@ function AddPurchaseElement(data) {
     price_range_label.className = "framework_box_price_range";
 
     const framework_name = document.createElement("p");
-    framework_name.innerHTML = data.name
+    framework_name.innerHTML = name
     framework_name.className = "framework_box_name";
 
     const add_to_cart_b = document.createElement("button");
@@ -165,7 +165,7 @@ function AddPurchaseElement(data) {
     const urlString = 'url(' + data.image_url + ')';
     purchaseFrame.style.backgroundImage = urlString
 
-    add_to_cart_b.addEventListener("click", AddToCartButtonClick(data.name, urlString))
+    add_to_cart_b.addEventListener("click", AddToCartButtonClick(name, urlString))
 
     FrameworkHolder.appendChild(purchaseFrame);
 }
@@ -173,9 +173,10 @@ function AddPurchaseElement(data) {
 fetch('/framework_games.json')
 .then(res => res.json())
 .then(data => {
-    data.forEach(item => {
-        AddPurchaseElement(item);
-    })
+    for (const key in data) {
+        const value = data[key];
+        AddPurchaseElement(value, key);
+    }
 })
 
 function RemoveCheckoutElement(elem) { 
