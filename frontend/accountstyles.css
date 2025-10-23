@@ -6,15 +6,25 @@
     border-radius: 1vw;
 
     color: white;
-    padding: 15px 32px;
+
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+
     font-size: clamp(0.5rem, 1.25vw, 3rem);
     width: 10%;
+
+    aspect-ratio: 3;
+    
+    
     position: relative;
+
     margin-inline: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .login_button:hover {
     color: rgb(255, 0, 0);
@@ -45,4 +55,15 @@
 
 .download_b:hover {
     cursor: pointer;
+}
+
+.main_page {
+    background-color: black;
+
+    width:100%;
+    aspect-ratio: 2;
+}
+
+.account_menu_title {
+   
 }
