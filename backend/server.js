@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const fs = require('fs')
 
-const download_folder_url = './downloads'
+const download_folder_url = '/downloads'
 
 const db = new sqlite3.Database('./backend/userdata.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) return console.error(err.message);
@@ -203,32 +203,38 @@ app.post('/api/download', (req, res) => {
     //Verify Login
 
     if (!test_account_list.has(body.username)) {
-        res.send("Invalid username")
+        console.log("Invalid username")
         return
     }
 
     const user_data = test_account_list.get(body.username)
 
      if (user_data.password != body.password) {
-        res.send("Invalid password")
+        console.log("Invalid password")
         return
     }
 
-    if (!user_data.owned_frameworks.includes(user_data.download_name)) {
+    if (!user_data.owned_frameworks.includes(body.download_name)) {
+        console.log("doesn't owned framework", user_data.name)
         return
     }
 
-    const filePath = download_folder_url + user_data.download_name
+    const filePath = path.join(__dirname, download_folder_url, `${body.download_name}.jpg`);
+
 
     if (!fs.existsSync(filePath)) {
+        console.log(filePath)
+        console.log("file not found")
         return res.status(404).send("File not found");
     }
 
     // Send file for download
-    res.download(filePath, filename, err => {
+    res.download(filePath, body.download_name+".jpg", err => {
         if (err) {
             console.error(err);
-            res.status(500).send("Error downloading file");
+            if (!res.headersSent) {
+                res.status(500).send("Error downloading file");
+            }
         }
     });
 })

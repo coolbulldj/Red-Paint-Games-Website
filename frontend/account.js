@@ -1,3 +1,5 @@
+
+
 const FrameworkHolder = document.getElementById("frameworks_holder");
 //alert("f");
 const downloadAPI_URL = 'typeshittt'
@@ -7,7 +9,36 @@ function DownloadElem(name) {
     const password = localStorage.getItem("password")
     const username = localStorage.getItem("username")
 
-    console.log(password, username)
+    const url = window.location.origin + '/api/download'
+    console.log(name)
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+            "password" : password,
+            "username" : username,
+            "download_name": name
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const a = document.createElement('a')
+
+        const url = window.URL.createObjectURL(blob)
+
+        a.href = url
+        a.download = 'random_shit.jpg'
+
+        a.style.display = "none";
+        document.body.append(a)
+
+        a.click();
+
+        a.remove();
+        window.URL.revokeObjectURL(url);
+    })
 }
 
 function AddDownloadElement(data, name) {
