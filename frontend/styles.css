@@ -51,7 +51,7 @@
     font-size: clamp(0.5rem, 1.25vw, 3rem);
     width: 5%;
     position: relative;
-    left: 40%;
+    left: 30%;
 }
 
 .menu_home_button:hover {
@@ -69,7 +69,7 @@
     font-size: clamp(0.5rem, 1.25vw, 3rem);
     width: 5%;
     position: relative;
-    left: 62%;
+    left: 50%;
 }   
 
 .menu_contact_button:hover {
@@ -87,7 +87,7 @@
     font-size: clamp(0.5rem, 1.25vw, 3rem);
     width: 5%;
     position: relative;
-    left: 52%;
+    left: 40%;
 }
 
 .menu_login_button:hover {
@@ -106,10 +106,30 @@
     font-size: clamp(0.5rem, 1.25vw, 3rem);
     width: 5%;
     position: relative;
-    left: 42%;
+    left: 32%;
 }
 
 .menu_frameworks_button:hover {
+    color: rgb(255, 0, 0);
+}
+
+
+.menu_owned_frameworks {
+    background-color: #00000000; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 3%;
+    text-wrap-mode: nowrap;
+    position: relative;
+    left: 36%;
+}
+
+.menu_owned_frameworks:hover {
     color: rgb(255, 0, 0);
 }
 
@@ -322,7 +342,7 @@
 }
 
 .main_game_box.img1 {
-    background-image: url('https://images.ctfassets.net/rporu91m20dc/4Ezmp6OT3zoeWPbfY9Z8Ae/30fae86ade64d20f6f90adb921ba839a/LargeHero_F76_P52_Skyline-Valley_Standard_3840x2160.png?w=1066&h=600&fit=thumb');
+    background-image: url('../Assets/FrameworkIcons/2.png');
 }
 
 .main_game_box.img2 {
@@ -334,7 +354,7 @@
 }
 
 .main_game_box.img4 {
-    background-image: url('https://www.hdwallpapers.in/download/roblox_background_hd_games-HD.jpg');
+    background-image: url('../Assets/FrameworkIcons/2.png');
 }
 
 .main_game_box.img5 {
@@ -866,6 +886,31 @@
 
 .framework_box_add_to_cart {
     color:rgb(255, 255, 255);
+    background-color: rgb(109, 109, 109);
+
+    font-family: sans-serif;
+    font-size: clamp(0.25rem, 1.5vw, 3rem);
+    font-weight: 600;
+
+    border-radius: 1vw;
+    border: none;
+
+    pointer-events: auto;
+
+    width:30%;
+    height: 60%;
+
+    position:relative;
+
+    left:2%;
+    top:20%;
+
+
+    z-index: 3;
+}
+
+.download_button {
+     color:rgb(255, 255, 255);
     background-color: rgb(109, 109, 109);
 
     font-family: sans-serif;

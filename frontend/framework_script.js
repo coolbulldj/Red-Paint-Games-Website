@@ -1,7 +1,4 @@
 
-const home_url = "/home.html"
-const frameworks_url = "/framework.html"
-
 const contact_api_url = "/api/contact"
 const purchase_api_url = ""
 
@@ -64,34 +61,6 @@ const email_input = document.getElementById('EmailInput')
 const discord_input = document.getElementById('DiscordInput')
 const phone_number_input = document.getElementById('PhoneInput')
 
-
-
-function HomeButtonClick() {
-    if (window.location.pathname !== home_url) {
-        window.location.replace(home_url)
-    }
-
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    })
-}
-
-function ContactButtonClick() {
-    document.getElementById("ContactSection").scrollIntoView({ behavior: 'smooth' });
-}
-
-function DevTeamButtonClick() {
-    document.getElementById("TeamSection").scrollIntoView({ behavior: 'smooth' });
-}
-
-function FrameworksButtonClick() {
-    window.location.replace(frameworks_url)
-}
-
-function GamesButtonClick() {
-    document.getElementById("GamesSection").scrollIntoView({ behavior: 'smooth' });
-}
 
 function SubmitButtonClick() {
     alert('your current message is ' + message_input.value)
@@ -226,42 +195,6 @@ function ClearCheckoutElements() {
     checkout_list.innerHTML = "";
 }
 
-//Social Media redirects
-function TwitterRedirect() {
-    window.open("https://twitter.com/RedPaintGames", "_blank");
-}
-
-function YouTubeRedirect() {
-    window.open("InstagramIcon", "_blank");
-}
-
-function DiscordRedirect() {
-    window.open("https://discord.gg/wHB59j9Z3H", "_blank");
-}
-
-function InstagramRedirect() {
-    window.open("https://www.instagram.com/redpaintgames/", "_blank");
-}
-
-function PlayHoverSound() {
-    const hover_sound = new Audio("../assets/sounds/HoverSound.mp3");
-    hover_sound.play();
-}
-
-// Assign the functions to the buttons
-
-document.getElementById("HomeButton").onclick = HomeButtonClick;
-
-document.getElementById("ContactButton").onclick = ContactButtonClick;
-
 const checkout_button = document.getElementById("CheckoutButton");
 
 checkout_button.onclick = OnCheckout;
-
-//These buttons should link to videos about how to use the frameworks
-
-
-document.getElementById("TwitterIcon").onclick = TwitterRedirect;
-document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
-document.getElementById("DiscordIcon").onclick = DiscordRedirect;
-document.getElementById("InstagramIcon").onclick = InstagramRedirect;

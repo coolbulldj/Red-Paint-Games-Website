@@ -38,6 +38,29 @@ db.run(
 
     console.log('New data has been inserted')
 })) */
+//Process 
+
+
+//Crypto processing
+// Create a new payment
+
+const createPayment = async (orderId) => {
+  const callbackUrl = encodeURIComponent('https://yoursite.com/webhook?order_id=' + orderId);
+  
+  const params = new URLSearchParams({
+    callback: callbackUrl,
+    address: 'YOUR_WALLET_ADDRESS', //add later
+    post: 0,
+    json: 0,
+    pending: 1,
+    multi_token: 0,
+    convert: 1
+  });
+  
+  const response = await fetch(`https://api.cryptapi.io/btc/create/?${params}`);
+  const data = await response.json();
+  return data;
+};
 
 
 //Update data
@@ -53,6 +76,18 @@ VALUES(?,?,?,?,?,?,?,?)`;
         })
     ) 
 }
+
+test_account_list = new Map([
+    [
+        "blank",
+        {
+            password: "abc",
+            owned_frameworks: [
+                "Obby", "Avatar Shopping"
+            ]
+        }
+    ]
+])
 
 function PrintOffDb() {
     console.log("printing off db")
@@ -121,6 +156,40 @@ app.post('/api/verifyUserAgreement', (req, res) => {
     console.log("User cookies:", req.cookies)
     res.send()
 });
+
+app.post('/api/verify_login', (req, res) => {
+    const body = req.body
+
+    if (!test_account_list.has(body.username)) {
+        res.send("Invalid username")
+        return
+    }
+
+    const user_data = test_account_list.get(body.username)
+
+     if (user_data.password != body.password) {
+        res.send("Invalid password")
+        return
+    }
+
+    res.sendStatus(204)
+})
+
+app.post('/api/get_owned_frameworks', (req, res) => {
+    const body = req.body
+
+    if (!test_account_list.has(body.username)) {
+        return
+    }
+
+    const user_data = test_account_list.get(body.username)
+
+     if (user_data.password != body.password) {
+        return
+    }
+
+    res.sendStatus(200).json(user_data.owned_frameworks)
+})
 
 app.post('/api/contact', (req, res) => {
     const req_body = req.body;
