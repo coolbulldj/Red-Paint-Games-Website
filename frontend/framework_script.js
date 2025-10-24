@@ -1,6 +1,4 @@
-
-const contact_api_url = "/api/contact"
-const purchase_api_url = ""
+const purchase_api_url = "/api/purchase_framework"
 
 const AddCartBColors = {
     [true] : "#262626ff",
@@ -53,13 +51,6 @@ function exit( status ) {
     throw '';
 }
 
-
-//Elements
-const message_input = document.getElementById('MessageInput')
-const name_input = document.getElementById('NameInput')
-const email_input = document.getElementById('EmailInput')
-const discord_input = document.getElementById('DiscordInput')
-const phone_number_input = document.getElementById('PhoneInput')
 
 
 function SubmitButtonClick() {
@@ -185,11 +176,6 @@ function RemoveCheckoutElement(elem) {
 
 
 
-function OnCheckout() {
-    
-}
-
-
 function ClearCheckoutElements() {
     const checkout_list = document.getElementById("CheckoutList");
     checkout_list.innerHTML = "";
@@ -197,29 +183,28 @@ function ClearCheckoutElements() {
 
 const checkout_button = document.getElementById("CheckoutButton");
 
-checkout_button.onclick = OnCheckout;
 
 // Get ticker information and minimums
-const getTickerInfo = async () => {
-  const response = await fetch('https://api.cryptapi.io/btc/info/');
+const getTickerInfo = async (token) => {
+  const response = await fetch('https://api.cryptapi.io/'+ token +'/info/');
   const data = await response.json();
   return data;
 };
 
-// Convert USD to BTC for ecommerce payments
-const convertAmount = async (usdAmount) => {
+// Convert USD to token for ecommerce payments
+const convertAmount = async (usdAmount, token) => {
   const params = new URLSearchParams({
     value: usdAmount,
     from: 'USD'
   });
   
-  const response = await fetch(`https://api.cryptapi.io/btc/convert/?${params}`);
+  const response = await fetch(`https://api.cryptapi.io/`+ token +`/convert/?${params}`);
   const data = await response.json();
-  return data.value_coin; // BTC amount
+  return data.value_coin; // token amount
 };
 
 // Get QR code for payment address
-const getQRCode = async (address, amount = null) => {
+const getQRCode = async (address, amount = null, token) => {
   const params = new URLSearchParams({
     address: address,
     size: 200
@@ -229,62 +214,39 @@ const getQRCode = async (address, amount = null) => {
     params.append('value', amount);
   }
   
-  const response = await fetch(`https://api.cryptapi.io/btc/qrcode/?${params}`);
+  const response = await fetch(`https://api.cryptapi.io/`+ token +`/qrcode/?${params}`);
   const data = await response.json();
   return data.qr_code; // Base64 image
 };
 
-// Display payment information - Exchange Deposits
-const displayExchangeDeposit = async (paymentData) => {
-  const tickerInfo = await getTickerInfo();
-  const qrCode = await getQRCode(paymentData.address_in);
-  
-  const paymentContainer = document.getElementById('payment-container');
-  paymentContainer.innerHTML = `
-    <div class="payment-info">
-      <h3>Deposit Bitcoin</h3>
-      <div class="payment-details">
-        <p><strong>Minimum Deposit:</strong> ${tickerInfo.minimum_transaction_coin} BTC</p>
-        <p><strong>Send Bitcoin to:</strong></p>
-        <div class="address-container">
-          <code>${paymentData.address_in}</code>
-          <button onclick="copyAddress('${paymentData.address_in}')">Copy</button>
-        </div>
-        <div class="qr-code">
-          <img src="data:image/png;base64,${qrCode}" alt="Payment QR Code" />
-        </div>
-        <p class="warning">⚠️ Send only amounts above ${tickerInfo.minimum_transaction_coin} BTC</p>
-      </div>
-      <div class="payment-status">
-        <p id="status">⏳ Waiting for deposit...</p>
-      </div>
-    </div>
-  `;
-};
-
 // Display payment information - Ecommerce Payment
-const displayEcommercePayment = async (paymentData, usdAmount) => {
-  const btcAmount = await convertAmount(usdAmount);
-  const tickerInfo = await getTickerInfo();
+const displayEcommercePayment = async (address, usdAmount, ticket_token) => {
+  const crypto_amount = await convertAmount(usdAmount, ticket_token);
+  const tickerInfo = await getTickerInfo(ticket_token);
   const minimumAmount = tickerInfo.minimum_transaction_coin;
-  
+  const CryptoName = tickerInfo.coin
+  const TickerName = tickerInfo.ticker.toUpperCase();
+
   // Validate minimum amount
-  if (btcAmount < minimumAmount) {
-    const paymentContainer = document.getElementById('payment-container');
+  if (crypto_amount < minimumAmount) {
+    alert('can not partake in transaction')
+    const paymentContainer = document.getElementById('payment_holder');
     paymentContainer.innerHTML = `
-      <div class="payment-error">
-        <h3>❌ Payment Amount Too Low</h3>
-        <div class="error-details">
-          <p><strong>Your payment amount:</strong> ${btcAmount} BTC</p>
-          <p><strong>Minimum required:</strong> ${minimumAmount} BTC</p>
-          <p class="warning">⚠️ Payments below the minimum will be lost. Please increase your order amount.</p>
-        </div>
-      </div>
-    `;
+    <div class = "crypto_qr_code_holder">
+      <img class = "crypto_qr_code">
+      <h1 class = "qr_code_main">N/A</h1>
+      <p class = "qr_code_sub">ADDRESS</p>
+    </div>
+    <h1 class = "requested_amount">CAN NOT FALICALATE THIS TRANSACTION</h1>
+    <p class = "detail_note">Note: CAN NOT FALICALATE THIS TRANSACTION, as the USD Amount is below the exchange minimum meaning funds will be lost</p>
+    <div class = "address_box">
+      <p class = "address_text">N/A</p>
+      <button class = "copy_address_icon"></button>
+    </div>`;
     return;
   }
 
-  const qrCode = await getQRCode(paymentData.address_in, btcAmount);
+  const qrCode = await getQRCode(address, crypto_amount, ticket_token);
 
 
   const paymentContainer = document.getElementById("payment_holder")
@@ -292,15 +254,39 @@ const displayEcommercePayment = async (paymentData, usdAmount) => {
   paymentContainer.innerHTML = 
   `<div class = "crypto_qr_code_holder">
       <img class = "crypto_qr_code" src="data:image/png;base64,${qrCode}" alt="Payment QR Code">
-      <h1 class = "qr_code_main">BITCOIN(BTC)</h1>
+      <h1 class = "qr_code_main">${CryptoName}(${TickerName})</h1>
       <p class = "qr_code_sub">ADDRESS</p>
     </div>
-    <h1 class = "requested_amount">PLEASE SEND  ‍<mark class = "gray_mark">${btcAmount} BTC</mark> ‍ ($${usdAmount})</h1>
+    <h1 class = "requested_amount">PLEASE SEND  ‍<mark class = "gray_mark" id ="CryptoOwed">${crypto_amount} ${TickerName}</mark> ‍ ($${usdAmount})</h1>
     <p class = "detail_note">Note: If using an exchange please add the exchange fee to the sent amount. Exchanges usually deduct the fee from the sent amount.</p>
     <div class = "address_box">
-      <p class = "address_text">Bph2g11Js9uukWNBT5peRsX1TWzi6ov1L95zCAQt2JfF</p>
-      <button class = "copy_address_icon"></button>
+      <p class = "address_text">${address}</p>
+      <button class = "copy_address_icon" id = "CopyB"></button>
     </div>`
+
+    const CopyButton = document.getElementById("CopyB")
+  
+    CopyButton.onclick = function() {
+      navigator.clipboard.writeText(address)
+      .then(() => {
+        console.log('copied to clipboard')
+      })
+      .catch(err => {
+        console.warn('Failed to copy: ', err)
+      })
+    }
+
+    const CryptoB = document.getElementById("CryptoOwed")
+
+    CryptoB.onclick = function() {
+      navigator.clipboard.writeText(crypto_amount)
+      .then(() => {
+        console.log('copied to clipboard')
+      })
+      .catch(err => {
+        console.warn('Failed to copy: ', err)
+      })
+    }
 };
 
 const copyAddress = (address) => {
@@ -313,16 +299,34 @@ const copyAmount = (amount) => {
   alert('Amount copied to clipboard!');
 };
 
-const d = {
-  "address_in": "14PqCsA7KMgseZMPwg6mJy754MtQkrgszu",
-  "address_out": "1H6ZZpRmMnrw8ytepV3BYwMjYYnEkWDqVP",
-  "callback_url": "https://yoursite.com/webhook?order_id=12345",
-  "priority": "default",
-  "minimum_transaction_coin": 0.008,
-  "status": "success"
-}
 
-displayEcommercePayment(
-    d, 100
-);
+checkout_button.onclick = function() {
+  //FrameworkGamesJson = await fetch('/framework_games.json')
+  
+  if (Array.isArray(cart) && cart.length === 0) {
+    alert("No items to check out")
+    return
+  }
+
+
+  const url = window.location.origin + purchase_api_url
+
+  fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        "frameworks" : cart
+      }),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
+  .then(response => response.json())
+  .then(response =>  {
+    const USD = response.usd
+    const Ticker = response.ticker
+    const Address = response.address
+
+    displayEcommercePayment(Address, USD, Ticker)
+  })
+};
 

@@ -226,8 +226,20 @@ app.post('/api/purchase_framework', (req, res) => {
     const protocol = req.protocol;        // "http" or "https"
     const host = req.get('host');         // domain + port (e.g., "localhost:3000")
     const baseUrl = `${protocol}://${host}`;
-    console.log('balls')
-    PurchaseFrameworks(["Obby", "Avatar Shopping"], baseUrl);
+
+    const frameworks = req.body.frameworks
+    
+    PurchaseFrameworks(frameworks, baseUrl)
+    .then((response) => {
+        const purchase_data = response.purchase_data
+        const usd_cost = response.usd
+        const client_data = {
+            "address" : purchase_data.address_in,
+            "ticker" : "sol/sol",
+            "usd": usd_cost,
+        }
+        res.json(client_data);
+    })
 })
 
 app.post('/api/verify_login', (req, res) => {
@@ -262,7 +274,6 @@ app.post('/api/get_owned_frameworks', (req, res) => {
         res.sendStatus(204)
         return
     }
-    console.log(user_data.owned_frameworks)
     res.json(user_data.owned_frameworks)
 })
 
@@ -306,29 +317,6 @@ app.post('/api/download', (req, res) => {
             }
         }
     });
-})
-
-app.post('/api/contact', (req, res) => {
-    const req_body = req.body;
-
-    const ip = req.ip;
-
-    if (ip.startsWith('::ffff:')) ip = ip.replace('::ffff:', ''); // normalize IPv4
-
-    AddData([
-        req_body.email,
-        req_body.name,
-        req_body.discord,
-        req_body.phone,
-        ip,
-        req_body.message,
-        "contact",
-        false, //This is the boolean on whether the data has been read
-    ])
-
-    //PrintOffDb();
-
-    return res.sendStatus(200);
 })
 
 app.get('/userdb', (req, res) => {

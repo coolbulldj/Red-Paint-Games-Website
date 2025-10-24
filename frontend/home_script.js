@@ -48,7 +48,6 @@ function SubmitButtonClick() {
     alert('your current message is ' + message_input.value)
     
     const url = window.location.origin + contact_api_url
-    alert(url)
     fetch(url, {
         method: "POST",
         body: JSON.stringify({

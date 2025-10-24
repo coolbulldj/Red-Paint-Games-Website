@@ -5,9 +5,6 @@ import path from 'path'
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import pkg from '@cryptapi/api';
-const CryptAPI = pkg.default || pkg; // Access the default export
-
 const WalletAddress = 'BnT48WhnmLF13khMKn4fpsmQVKLrJYSbAKZhr6uxXHrq'
 const CTCB_baseUrl = '/api/process_framework'
 
@@ -25,6 +22,8 @@ function loadGames() {
 const FrameworkGamesJson = loadGames()
 console.log(FrameworkGamesJson);
 console.log("workin")
+
+
 
 export async function PurchaseFrameworks(PurchaseList, baseUrl) {
   if (!Array.isArray(PurchaseList)) {
@@ -45,33 +44,27 @@ export async function PurchaseFrameworks(PurchaseList, baseUrl) {
     TotalCost += FrameworkData.price
   });
 
-  console.log(TotalCost)
-
   
   const CTCBUrl = baseUrl + CTCB_baseUrl 
-  console.log(CTCBUrl)
+
   //Crypto processing
-  // Using the official Node.js library
-
-  const params = {
-    order_id: 1,
-  };
-
-  const cryptapiParams = {
-    post: 0,
+  const params = new URLSearchParams({
+    callback: CTCBUrl,
+    address: WalletAddress,
+    post: 1,
     json: 0,
     pending: 1,
-    multi_token: 1,
+    multi_token: 0,
     convert: 1
-  };
+  });
+  
+  const response = await fetch(`https://api.cryptapi.io/sol/sol/create/?${params}`);
+  const data = await response.json();
 
-  const ca = new CryptAPI('sol/sol', WalletAddress, CTCBUrl, params, cryptapiParams)
-
-  const address = await ca.getAddress()
-  // address.address_in
-  console.log(address)
-
-
+  return {
+    "purchase_data" : data, 
+    "usd" : TotalCost
+  }
 }
 
 export function CompleteTransaction(orderId) {
