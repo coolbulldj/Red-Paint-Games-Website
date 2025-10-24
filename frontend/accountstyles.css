@@ -18,6 +18,8 @@
     
     position: relative;
 
+    top:40%;
+
     margin-inline: auto;
 
     display: flex;
@@ -61,9 +63,107 @@
     background-color: black;
 
     width:100%;
-    aspect-ratio: 2;
+    height: 100vh;
 }
 
 .account_menu_title {
-   
+    color: rgb(255, 0, 0);
+    font-family:  sans-serif;
+    font-size: clamp(0.5rem, 3vw, 5rem);
+    max-width: 40%;
+    background-color: rgba(127, 255, 212, 0);
+    position: relative;
+    max-width: fit-content;
+    margin-inline: auto;
+    top:12%;
+    left:0%;
 }
+
+/* Framework boxes */
+
+.frameworks_holder {
+    background-color: rgba(0, 255, 255, 0);
+
+    width: 80%;
+
+    position: relative;
+    top:15%;
+
+    margin-inline: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    grid-auto-rows: auto;
+    gap:2%;
+}
+
+.frameworks_holder {
+    background-color: rgba(0, 255, 255, 0);
+
+    width: 80%;
+
+    position: relative;
+    top:15%;
+
+    margin-inline: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    grid-auto-rows: auto;
+    gap:2%;
+}
+
+.framework_box {
+    background-color: rgb(33,33,33);
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: solid 0.25vw rgb(42, 42, 42);
+    overflow: hidden;
+    border-radius: 1vw;
+
+    /*Image background */
+    background-repeat: no-repeat;   /* 🚫 no tiling */
+    background-size: 95% 95%;       /* scale image inside box */
+    background-position: center;    /* center it */
+
+    transition: width 0.2s ease-in-out;
+
+    margin: 0%;
+
+    display: grid;
+    column-gap: 5%;
+}
+
+/*https://tr.rbxcdn.com/180DAY-887febdd3a4b0ff1e2d97125b0b9b1b2/768/432/Image/Webp/noFilter*/
+
+.framework_box:hover {
+    width: 102%;
+}
+
+
+.framework_box_name {
+    color:rgb(148, 148, 148);
+    background-color: rgba(109, 109, 109, 0);
+
+    
+    border-radius: 0.75vw;
+   /* border: solid 0.15vw rgb(82, 82, 82); */
+
+    -webkit-text-stroke: 0.05vw rgb(0, 0, 0);
+
+    font-family: sans-serif;
+    font-size: clamp(0.5rem, 2.5vw, 3rem);
+    font-weight: 700;
+
+    margin-inline: auto;
+
+    position:relative;
+    top:70%
+}
+

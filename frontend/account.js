@@ -1,6 +1,7 @@
 
 
 const FrameworkHolder = document.getElementById("frameworks_holder");
+const HeaderMain = document.getElementById("HeaderTitle")
 //alert("f");
 const downloadAPI_URL = 'typeshittt'
 const LoginB = document.getElementById("login_button")
@@ -85,7 +86,7 @@ function LoadOwnedFrameworks(data) {
 }
 
 const url =  window.location.origin + "/api/get_owned_frameworks"
-
+console.log(localStorage.getItem("password"), localStorage.getItem("username"))
 fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -97,10 +98,8 @@ fetch(url, {
     }
 }).then(response => {
     if (response.status != 200) {
-        alert("not ok")
-        return [
-            "Obby"
-        ]
+        HeaderMain.innerHTML = "No Frameworks Owned"
+        return []
     }
 
     return response.json();

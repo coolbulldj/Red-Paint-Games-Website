@@ -1,0 +1,113 @@
+* {
+  margin: 0;        /* removes default margin */
+  padding: 0;       /* removes default padding */
+  box-sizing: border-box;
+}
+
+
+.menu_box {
+    aspect-ratio: 40; 
+    width: 100%;
+    max-width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid red;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top:0%;
+    left:0%;
+    z-index: 10;
+    /* Blur */
+    backdrop-filter: blur(10px);          /* applies blur */
+    -webkit-backdrop-filter: blur(10px);  /* Safari support */
+}
+
+
+.menu_title {
+    background-color: rgba(0, 0, 0, 0) ;
+    color:  rgb(255, 0, 0);
+    font-family: sans-serif;
+    position: relative;
+    font-size: clamp(0.5rem, 2vw, 3rem);
+    top: 0;
+    left: 15%; 
+    max-width: 50;
+}
+
+.menu_home_button {
+    background-color: #00000000; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 5%;
+    position: relative;
+    left: 30%;
+}
+
+.menu_home_button:hover {
+    color: rgb(255, 0, 0);
+}
+
+.menu_contact_button {
+    background-color: #00000000; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 5%;
+    position: relative;
+    left: 50%;
+}   
+
+.menu_contact_button:hover {
+    color: rgb(255, 0, 0);
+}
+
+
+.menu_frameworks_button {
+    background-color: #00000000; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 5%;
+    position: relative;
+    left: 32%;
+}
+
+.menu_frameworks_button:hover {
+    color: rgb(255, 0, 0);
+}
+
+
+.menu_owned_frameworks {
+    background-color: #00000000; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(0.5rem, 1.25vw, 3rem);
+    width: 3%;
+    text-wrap-mode: nowrap;
+    position: relative;
+    left: 36%;
+}
+
+.menu_owned_frameworks:hover {
+    color: rgb(255, 0, 0);
+}
+

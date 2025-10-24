@@ -165,3 +165,32 @@
     position: relative;
     top:40%
 }
+
+.continue_guest {
+    background-color: rgba(0, 0, 0, 0);
+    color:rgb(161,161,161);
+
+    width: 55%;
+    aspect-ratio: 10;
+
+    display: flex;
+    margin: 0 auto;
+
+    border: none black 0.1vw;
+    border-radius: 2vw;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.5rem, 1vw, 2rem);
+
+    position: relative;
+    top:35%
+}
+
+.continue_guest:hover {
+    cursor: pointer;
+}

@@ -186,8 +186,7 @@ function RemoveCheckoutElement(elem) {
 
 
 function OnCheckout() {
-    alert('Checking out!');
-    alert(cart);
+    
 }
 
 
@@ -199,3 +198,123 @@ function ClearCheckoutElements() {
 const checkout_button = document.getElementById("CheckoutButton");
 
 checkout_button.onclick = OnCheckout;
+
+// Get ticker information and minimums
+const getTickerInfo = async () => {
+  const response = await fetch('https://api.cryptapi.io/btc/info/');
+  const data = await response.json();
+  return data;
+};
+
+// Convert USD to BTC for ecommerce payments
+const convertAmount = async (usdAmount) => {
+  const params = new URLSearchParams({
+    value: usdAmount,
+    from: 'USD'
+  });
+  
+  const response = await fetch(`https://api.cryptapi.io/btc/convert/?${params}`);
+  const data = await response.json();
+  return data.value_coin; // BTC amount
+};
+
+// Get QR code for payment address
+const getQRCode = async (address, amount = null) => {
+  const params = new URLSearchParams({
+    address: address,
+    size: 200
+  });
+  
+  if (amount) {
+    params.append('value', amount);
+  }
+  
+  const response = await fetch(`https://api.cryptapi.io/btc/qrcode/?${params}`);
+  const data = await response.json();
+  return data.qr_code; // Base64 image
+};
+
+// Display payment information - Exchange Deposits
+const displayExchangeDeposit = async (paymentData) => {
+  const tickerInfo = await getTickerInfo();
+  const qrCode = await getQRCode(paymentData.address_in);
+  
+  const paymentContainer = document.getElementById('payment-container');
+  paymentContainer.innerHTML = `
+    <div class="payment-info">
+      <h3>Deposit Bitcoin</h3>
+      <div class="payment-details">
+        <p><strong>Minimum Deposit:</strong> ${tickerInfo.minimum_transaction_coin} BTC</p>
+        <p><strong>Send Bitcoin to:</strong></p>
+        <div class="address-container">
+          <code>${paymentData.address_in}</code>
+          <button onclick="copyAddress('${paymentData.address_in}')">Copy</button>
+        </div>
+        <div class="qr-code">
+          <img src="data:image/png;base64,${qrCode}" alt="Payment QR Code" />
+        </div>
+        <p class="warning">⚠️ Send only amounts above ${tickerInfo.minimum_transaction_coin} BTC</p>
+      </div>
+      <div class="payment-status">
+        <p id="status">⏳ Waiting for deposit...</p>
+      </div>
+    </div>
+  `;
+};
+
+// Display payment information - Ecommerce Payment
+const displayEcommercePayment = async (paymentData, usdAmount) => {
+  const btcAmount = await convertAmount(usdAmount);
+  const tickerInfo = await getTickerInfo();
+  const minimumAmount = tickerInfo.minimum_transaction_coin;
+  
+  // Validate minimum amount
+  if (btcAmount < minimumAmount) {
+    const paymentContainer = document.getElementById('payment-container');
+    paymentContainer.innerHTML = `
+      <div class="payment-error">
+        <h3>❌ Payment Amount Too Low</h3>
+        <div class="error-details">
+          <p><strong>Your payment amount:</strong> ${btcAmount} BTC</p>
+          <p><strong>Minimum required:</strong> ${minimumAmount} BTC</p>
+          <p class="warning">⚠️ Payments below the minimum will be lost. Please increase your order amount.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const qrCode = await getQRCode(paymentData.address_in, btcAmount);
+
+
+  const paymentContainer = document.getElementById("payment_holder")
+  
+  //reset payment Container
+  paymentContainer.innerHTML = ""
+
+  
+};
+
+const copyAddress = (address) => {
+  navigator.clipboard.writeText(address);
+  alert('Address copied to clipboard!');
+};
+
+const copyAmount = (amount) => {
+  navigator.clipboard.writeText(amount);
+  alert('Amount copied to clipboard!');
+};
+
+const d = {
+  "address_in": "14PqCsA7KMgseZMPwg6mJy754MtQkrgszu",
+  "address_out": "1H6ZZpRmMnrw8ytepV3BYwMjYYnEkWDqVP",
+  "callback_url": "https://yoursite.com/webhook?order_id=12345",
+  "priority": "default",
+  "minimum_transaction_coin": 0.008,
+  "status": "success"
+}
+
+displayEcommercePayment(
+    d, 100
+);
+

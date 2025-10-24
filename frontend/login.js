@@ -2,6 +2,7 @@ const PasswordElem = document.getElementById("password_input");
 const UsernameElem = document.getElementById("username_input");
 const MainB = document.getElementById("main_b");
 const SubB = document.getElementById("sub_b");
+const ContinueB = document.getElementById("continue_guest")
 const NoteLabel = document.getElementById("notification_label")
 
 const verfiyLoginUrl = '/api/verify_login'
@@ -28,10 +29,10 @@ function verifyLogin() {
     .then(response => response.text())
     .then(text => {
         if (!text) {
-            localStorage.setItem("username", UsernameElem.value)
-            localStorage.setItem("password", PasswordElem.value)
             window.location.replace(home_url)
         }
+        localStorage.setItem("username", UsernameElem.value)
+        localStorage.setItem("password", PasswordElem.value)
         NoteLabel.innerHTML = text
     })
     .catch(err => {
@@ -77,3 +78,7 @@ function SubBPress() {
 }
 
 SubB.onclick = SubBPress;
+ContinueB.onclick = function() {
+    window.location.replace(home_url)
+}
+DisplaySignIn();

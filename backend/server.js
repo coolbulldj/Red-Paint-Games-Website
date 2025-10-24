@@ -44,29 +44,6 @@ db.run(
 })) */
 //Process 
 
-
-//Crypto processing
-// Create a new payment
-
-const createPayment = async (orderId) => {
-  const callbackUrl = encodeURIComponent('https://yoursite.com/webhook?order_id=' + orderId);
-  
-  const params = new URLSearchParams({
-    callback: callbackUrl,
-    address: 'YOUR_WALLET_ADDRESS', //add later
-    post: 0,
-    json: 0,
-    pending: 1,
-    multi_token: 0,
-    convert: 1
-  });
-  
-  const response = await fetch(`https://api.cryptapi.io/btc/create/?${params}`);
-  const data = await response.json();
-  return data;
-};
-
-
 //Update data
 function AddData(data) {
     const sql = `INSERT INTO userdata (email, name, discord, phone, ip, message, type, read)
