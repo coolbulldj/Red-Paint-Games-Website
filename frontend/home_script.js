@@ -1,7 +1,3 @@
-
-const home_url = "/home.html"
-const frameworks_url = "/framework.html"
-
 const contact_api_url = "/api/contact"
 const purchase_api_url = "/api/purchase"
 
@@ -16,17 +12,6 @@ const phone_number_input = document.getElementById('PhoneInput')
 const hoverUrls = {}
 
 
-
-function HomeButtonClick() {
-    if (window.location.pathname !== home_url) {
-        window.location.replace(home_url)
-    }
-
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    })
-}
 
 function ContactButtonClick() {
     document.getElementById("ContactSection").scrollIntoView({ behavior: 'smooth' });
@@ -64,46 +49,12 @@ function SubmitButtonClick() {
     })
 }
 
-function AddToCartButtonClick() {
-    console.log('Add to cart button clicked')
-    alert('Added to cart!')
-}
-
-//Social Media redirects
-function TwitterRedirect() {
-    window.open("https://twitter.com/RedPaintGames", "_blank");
-}
-
-function YouTubeRedirect() {
-    window.open("InstagramIcon", "_blank");
-}
-
-function DiscordRedirect() {
-    window.open("https://discord.gg/wHB59j9Z3H", "_blank");
-}
-
-function InstagramRedirect() {
-    window.open("https://www.instagram.com/redpaintgames/", "_blank");
-}
-
-
 // Assign the functions to the buttons
-
-document.getElementById("HomeButton").onclick = HomeButtonClick;
-
-document.getElementById("ContactButton").onclick = ContactButtonClick;
 
 document.getElementById("DevTeamButton").onclick = DevTeamButtonClick;
 
 document.getElementById("FrameworksButton").onclick = FrameworksButtonClick;
 document.getElementById("MenuFrameworkButton").onclick = FrameworksButtonClick;
-document.getElementById("LoginButton").onclick = FrameworksButtonClick;
-
 document.getElementById("GamesButton").onclick = GamesButtonClick;
 
 document.getElementById("SubmitContactButton").onclick = SubmitButtonClick;
-
-document.getElementById("TwitterIcon").onclick = TwitterRedirect;
-document.getElementById("YouTubeIcon").onclick = YouTubeRedirect;
-document.getElementById("DiscordIcon").onclick = DiscordRedirect;
-document.getElementById("InstagramIcon").onclick = InstagramRedirect;
