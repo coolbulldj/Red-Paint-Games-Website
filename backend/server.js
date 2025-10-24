@@ -1,10 +1,18 @@
-const express = require('express');
+import express from 'express';
 
-const cookieParser = require('cookie-parser');
+import { PurchaseFrameworks } from './paymentUtil.mjs';
 
+import fs from 'fs'
+
+import path from 'path'
+
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+    
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/*
 const sqlite3 = require('sqlite3').verbose();
-
-const fs = require('fs')
 
 const download_folder_url = '/downloads'
 
@@ -24,9 +32,10 @@ db.serialize(() => {
            db.run('CREATE TABLE userdata(email, name, discord, phone, ip, message, type, read)')
         }
     })
-})
+}) 
 
-/* const sql = 'SELECT * FROM userdata'
+
+const sql = 'SELECT * FROM userdata'
 db.run(
     sql, 
     [
@@ -41,8 +50,9 @@ db.run(
     if (err) return console.error(err.message);
 
     console.log('New data has been inserted')
-})) */
+})) 
 //Process 
+
 
 //Update data
 function AddData(data) {
@@ -57,18 +67,6 @@ VALUES(?,?,?,?,?,?,?,?)`;
         })
     ) 
 }
-
-test_account_list = new Map([
-    [
-        "blank",
-        {
-            password: "abc",
-            owned_frameworks: [
-                "Obby", "Avatar Shopping"
-            ]
-        }
-    ]
-])
 
 function PrintOffDb() {
     console.log("printing off db")
@@ -87,56 +85,150 @@ function CloseDB() {
         if (err) return console.err(err.message)
     })
 }
+*/
 
-const bodyParser = require('body-parser')
-const path = require('path');
+
 const app = express();
 
 const UserAgreementVersion = "v1"; //Increase this value anytime the user agreement changes
 
+const APIKEY = process.env.CRYPT_SECRET || 'backward_key'
 
 const frontend_path = path.join(__dirname, "..", "frontend");
 
 app.use(
     express.json(),
     express.static(frontend_path),
-    cookieParser()
 )
 
-function verifyUserAgreement(req, res) {
-    const AgreementVersion = req.cookies.AgreementVersion;
+const test_account_list = new Map([
+    [
+        "blank",
+        {
+            password: "abc",
+            owned_frameworks: [
+                "Obby", "Avatar Shopping"
+            ]
+        }
+    ]
+])
 
-    if (!AgreementVersion || AgreementVersion != UserAgreementVersion) {
-        return false;
-    }
-    return true;
-}
+
 
 app.get('/', (req, res) => {
-    const isAgreed = verifyUserAgreement(req, res);
-    console.log("User is agreed?:", isAgreed)
-    console.log("Users cookies is:", req.cookies)
-    if (!isAgreed) {
-        res.sendFile(path.join(frontend_path, 'UserAgreement.html'));
-        return;
-    }
     res.sendFile(path.join(frontend_path, 'home.html'));
 })
 
-app.post('/api/verifyUserAgreement', (req, res) => {
-    console.log("Verifying user agreement")
-    let AgreementVersion = req.cookies.AgreementVersion;
-    if (!AgreementVersion || AgreementVersion != UserAgreementVersion) {
-        res.cookie(
-            'AgreementVersion',
-            UserAgreementVersion, 
-            { maxAge: 900000, httpOnly: true }
-        )
+/*app.post('/api/process_framework', (req, res) => {
+    const token = req.headers['api-key']
+}) */
+
+app.post('/api/process_framework', express.json(), (req, res) => {
+  // Handle both GET (default) and POST (if post=1 was set)
+  const webhookData = req.body;
+  const { 
+    uuid,
+    address_in, 
+    address_out, 
+    txid_in, 
+    txid_out, 
+    confirmations, 
+    value_coin, 
+    value_coin_convert,
+    value_forwarded_coin,
+    value_forwarded_coin_convert,
+    fee_coin,
+    coin,
+    price,
+    pending
+  } = webhookData;
+  // Custom parameters are ALWAYS delivered via the query string
+  const { order_id, user_id } = req.query;
+  
+  // Note: order_id and user_id come from the callback URL query string
+  
+  // Check if we've already processed this transaction
+  const alreadyProcessed = checkTransactionInDatabase(uuid);
+  
+  if (!alreadyProcessed) {
+    if (pending === 1) {
+      // Payment detected but not confirmed
+      console.log(`Pending payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
+      console.log(`UUID: ${uuid}, Price: $${price}`);
+      
+      // Store transaction in database with UUID
+      storeTransaction({
+        uuid: uuid,
+        address_in: address_in,
+        address_out: address_out,
+        txid_in: txid_in,
+        amount: value_coin,
+        coin: coin,
+        price: price,
+        status: 'pending',
+        value_coin_convert: value_coin_convert,
+        processed_at: new Date()
+      });
+      
+      // Notify user (WebSocket, email, etc.)
+      notifyUser(address_in, 'pending', {
+        uuid: uuid,
+        amount: value_coin,
+        coin: coin,
+        usd_value: value_coin_convert ? JSON.parse(value_coin_convert).USD : null
+      });
+      
+    } else if (pending === 0) {
+      // Payment confirmed
+      console.log(`Confirmed payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
+      console.log(`UUID: ${uuid}, Forwarded: ${value_forwarded_coin}, Fee: ${fee_coin}`);
+      
+      // Update database
+      updateTransaction(uuid, {
+        txid_out: txid_out,
+        confirmations: confirmations,
+        value_forwarded_coin: value_forwarded_coin,
+        value_forwarded_coin_convert: value_forwarded_coin_convert,
+        fee_coin: fee_coin,
+        status: 'confirmed',
+        confirmed_at: new Date()
+      });
+      
+      // Process order, send confirmation email, etc.
+      processSuccessfulPayment(uuid, {
+        orderId: order_id,
+        userId: user_id,
+        amount: value_coin,
+        forwarded_amount: value_forwarded_coin,
+        fee: fee_coin,
+        coin: coin,
+        confirmations: confirmations
+      });
+      
+      // Notify user
+      notifyUser(address_in, 'confirmed', {
+        uuid: uuid,
+        amount: value_coin,
+        forwarded_amount: value_forwarded_coin,
+        coin: coin,
+        confirmations: confirmations
+      });
     }
-    console.log("User agreement verified", UserAgreementVersion)
-    console.log("User cookies:", req.cookies)
-    res.send()
+  } else {
+    console.log(`Duplicate webhook received for UUID: ${uuid}`);
+  }
+  
+  // Always respond with *ok* or HTTP 200 to stop retries
+  res.status(200).send('*ok*');
 });
+
+app.post('/api/purchase_framework', (req, res) => {
+    const protocol = req.protocol;        // "http" or "https"
+    const host = req.get('host');         // domain + port (e.g., "localhost:3000")
+    const baseUrl = `${protocol}://${host}`;
+    console.log('balls')
+    PurchaseFrameworks(["Obby", "Avatar Shopping"], baseUrl);
+})
 
 app.post('/api/verify_login', (req, res) => {
     const body = req.body

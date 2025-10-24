@@ -289,10 +289,18 @@ const displayEcommercePayment = async (paymentData, usdAmount) => {
 
   const paymentContainer = document.getElementById("payment_holder")
   
-  //reset payment Container
-  paymentContainer.innerHTML = ""
-
-  
+  paymentContainer.innerHTML = 
+  `<div class = "crypto_qr_code_holder">
+      <img class = "crypto_qr_code" src="data:image/png;base64,${qrCode}" alt="Payment QR Code">
+      <h1 class = "qr_code_main">BITCOIN(BTC)</h1>
+      <p class = "qr_code_sub">ADDRESS</p>
+    </div>
+    <h1 class = "requested_amount">PLEASE SEND  ‍<mark class = "gray_mark">${btcAmount} BTC</mark> ‍ ($${usdAmount})</h1>
+    <p class = "detail_note">Note: If using an exchange please add the exchange fee to the sent amount. Exchanges usually deduct the fee from the sent amount.</p>
+    <div class = "address_box">
+      <p class = "address_text">Bph2g11Js9uukWNBT5peRsX1TWzi6ov1L95zCAQt2JfF</p>
+      <button class = "copy_address_icon"></button>
+    </div>`
 };
 
 const copyAddress = (address) => {
