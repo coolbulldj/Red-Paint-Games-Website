@@ -310,7 +310,7 @@ checkout_button.onclick = function() {
 
 
   const url = window.location.origin + purchase_api_url
-
+  //IUFp05Q8Aqx2Nswj
   fetch(url, {
       method: "POST",
       body: JSON.stringify({

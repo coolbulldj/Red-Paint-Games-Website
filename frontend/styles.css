@@ -218,27 +218,27 @@
 }
 
 .main_game_box.img1 {
-    background-image: url('../Assets/FrameworkIcons/2.png');
+    background-image: url('../Assets/FrameworkIcons/MiningGame.png');
 }
 
 .main_game_box.img2 {
-    background-image: url('https://d1079ywfijtdjs.cloudfront.net/images/obsidian/v2/games/newVegas/newVegas-keyart-2000w.jpg');
+    background-image: url('../Assets/FrameworkIcons/EmoteGameThumbnail.png');
 }
 
 .main_game_box.img3 {
-    background-image: url('https://wpassets.halowaypoint.com/wp-content/2022/02/Halo-Infinite-Chief-Weapon-scaled.jpg');
+    background-image: url('../Assets/FrameworkIcons/Obby.png');
 }
 
 .main_game_box.img4 {
-    background-image: url('../Assets/FrameworkIcons/2.png');
+    background-image: url('../Assets/FrameworkIcons/BigBid.png');
 }
 
 .main_game_box.img5 {
-    background-image: url('https://wallpapers.com/images/featured/minecraft-landscape-8h44acokruk5k6fh.jpg');
+    background-image: url('');
 }
 
 .main_game_box.img6 {
-    background-image: url('https://wallpapers.com/images/hd/fortnite-battle-royale-desktop-ty23oabol2bxs3zr.jpg');
+    background-image: url('');
 }
 
 .main_game_box_title {
@@ -370,19 +370,19 @@
 }
 
 .team_member_box.img1 {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV0zscYTnOxutaPDaZ9Un0Ak-y0yR8jw40qA&s');
+    background-image: url('../Assets/TeamPfps/FemalePfp.png');
 }
 
 .team_member_box.img2 {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV0zscYTnOxutaPDaZ9Un0Ak-y0yR8jw40qA&s');
+    background-image: url('../Assets/TeamPfps/MalePfp1.png');
 }
 
 .team_member_box.img3 {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV0zscYTnOxutaPDaZ9Un0Ak-y0yR8jw40qA&s');
+    background-image: url('../Assets/TeamPfps/MalePfp2.png');
 }
 
 .team_member_box.img4 {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV0zscYTnOxutaPDaZ9Un0Ak-y0yR8jw40qA&s');
+    background-image: url('../Assets/TeamPfps/MalePfp3.jpg');
 }
 
 .team_member_name {

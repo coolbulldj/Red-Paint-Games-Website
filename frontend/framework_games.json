@@ -3,12 +3,12 @@
         "youtube_url":"",
         "price_string":"$20",
         "price":20,
-        "image_url": "'https://substackcdn.com/image/fetch/$s_!CZ6T!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01e1bff6-8394-4067-a29a-4a6c3ab71898_2618x1448.png'"
+        "image_url": "../Assets/FrameworkIcons/AvatarShoppingGameTN.png"
     },
 "Obby": {
         "youtube_url":"",
         "price_string":"Free",
         "price":0,
-        "image_url": ""
+        "image_url": "../Assets/FrameworkIcons/Obby.png"
     }
 }

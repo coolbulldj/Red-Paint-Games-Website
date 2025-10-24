@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { PurchaseFrameworks } from './paymentUtil.mjs';
+import { insert_transaction } from './databaseUtil.mjs';
 
 import fs from 'fs'
 
@@ -8,6 +9,7 @@ import path from 'path'
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
     
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -124,6 +126,9 @@ app.get('/', (req, res) => {
 }) */
 
 app.post('/api/process_framework', express.json(), (req, res) => {
+//Will do this later 
+/*
+
   // Handle both GET (default) and POST (if post=1 was set)
   const webhookData = req.body;
   const { 
@@ -152,32 +157,35 @@ app.post('/api/process_framework', express.json(), (req, res) => {
   
   if (!alreadyProcessed) {
     if (pending === 1) {
-      // Payment detected but not confirmed
-      console.log(`Pending payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
-      console.log(`UUID: ${uuid}, Price: $${price}`);
+        // Payment detected but not confirmed
+        console.log(`Pending payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
+        console.log(`UUID: ${uuid}, Price: $${price}`);
       
-      // Store transaction in database with UUID
-      storeTransaction({
-        uuid: uuid,
-        address_in: address_in,
-        address_out: address_out,
-        txid_in: txid_in,
-        amount: value_coin,
-        coin: coin,
-        price: price,
-        status: 'pending',
-        value_coin_convert: value_coin_convert,
-        processed_at: new Date()
-      });
+        // Store transaction in database with UUID
+      
+        /*storeTransaction({
+            uuid: uuid,
+            address_in: address_in,
+            address_out: address_out,
+            txid_in: txid_in,
+            amount: value_coin,
+            coin: coin,
+            price: price,
+            status: 'pending',
+            value_coin_convert: value_coin_convert,
+            processed_at: new Date()
+        }); */
+
       
       // Notify user (WebSocket, email, etc.)
+      /*
       notifyUser(address_in, 'pending', {
         uuid: uuid,
         amount: value_coin,
         coin: coin,
         usd_value: value_coin_convert ? JSON.parse(value_coin_convert).USD : null
       });
-      
+
     } else if (pending === 0) {
       // Payment confirmed
       console.log(`Confirmed payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
@@ -217,7 +225,7 @@ app.post('/api/process_framework', express.json(), (req, res) => {
   } else {
     console.log(`Duplicate webhook received for UUID: ${uuid}`);
   }
-  
+  */
   // Always respond with *ok* or HTTP 200 to stop retries
   res.status(200).send('*ok*');
 });
