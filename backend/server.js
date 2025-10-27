@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { PurchaseFrameworks } from './paymentUtil.mjs';
-import { insert_transaction } from './databaseUtil.mjs';
+import { insert_transaction, updateTransaction, ReadAllPendingTransactions } from './databaseUtil.mjs';
 
 import fs from 'fs'
 
@@ -124,6 +124,17 @@ app.get('/', (req, res) => {
 /*app.post('/api/process_framework', (req, res) => {
     const token = req.headers['api-key']
 }) */
+updateTransaction(2, {
+    txid_out: "",
+    confirmations: {},
+    value_forwarded_coin: 1,
+    value_forwarded_coin_convert: {},
+    fee_coin: 0.01,
+    status: 'confirmed',
+    confirmed_at: new Date()
+});
+ReadAllPendingTransactions();
+
 
 app.post('/api/process_framework', express.json(), (req, res) => {
 //Will do this later 
