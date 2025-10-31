@@ -1,8 +1,8 @@
 {
 "Avatar Shopping":{
         "youtube_url":"",
-        "price_string":"$20",
-        "price":20,
+        "price_string":"$2.25",
+        "price":2.25,
         "image_url": "../Assets/FrameworkIcons/AvatarShoppingGameTN.png"
     },
 "Obby": {

@@ -7,22 +7,12 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 
-export async function insert_transaction(uuid, address_in, address_out, txid_in, value_coin, coin, price, value_coin_convert) {
+export async function insert_transaction(uuid, insert_data) {
     const { data, error } = await supabase
     .from('pending-transactions') // ✅ corrected table name
     .insert({
         id:uuid,
-        data: {
-            address_in: address_in,
-            address_out: address_out,
-            txid_in: txid_in,
-            amount: value_coin,
-            coin: coin,
-            price: price,
-            status: 'pending',
-            value_coin_convert: value_coin_convert,
-            processed_at: new Date()
-        }
+        data: insert_data
     })
 
     if (error) {
@@ -32,8 +22,19 @@ export async function insert_transaction(uuid, address_in, address_out, txid_in,
     }
 }
 
-export async function updateTransaction(params) {
-    
+export async function updateTransaction(uuid, update_data) {
+    const { data, error } = await supabase
+    .from('pending-transactions') // ✅ corrected table name
+    .update({
+        data: update_data
+    })
+    .eq('id', uuid)
+
+    if (error) {
+        console.error('Insert failed:', error)
+    } else {
+        console.log('Element inserted:', data)
+    }
 }
 
 export async function checkTransactionInDatabase(uuid) {
@@ -49,4 +50,19 @@ export async function checkTransactionInDatabase(uuid) {
     }
 
   return data.length > 0    // true if row exists
+}
+
+export async function processSuccessfulPayment(uuid, insert_data) {
+    const { data, error } = await supabase
+    .from('transactions') // ✅ corrected table name
+    .insert({
+        id:uuid,
+        data: insert_data
+    })
+
+    if (error) {
+        console.error('Insert failed:', error)
+    } else {
+        console.log('Element inserted:', data)
+    }
 }

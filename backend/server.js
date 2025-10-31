@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { PurchaseFrameworks } from './paymentUtil.mjs';
-import { insert_transaction } from './databaseUtil.mjs';
+import { insert_transaction, updateTransaction, processSuccessfulPayment } from './databaseUtil.mjs';
 
 import fs from 'fs'
 
@@ -115,8 +115,6 @@ const test_account_list = new Map([
     ]
 ])
 
-
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(frontend_path, 'home.html'));
 })
@@ -127,7 +125,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/process_framework', express.json(), (req, res) => {
 //Will do this later 
-/*
+    console.log("processing")
 
   // Handle both GET (default) and POST (if post=1 was set)
   const webhookData = req.body;
@@ -163,8 +161,7 @@ app.post('/api/process_framework', express.json(), (req, res) => {
       
         // Store transaction in database with UUID
       
-        /*storeTransaction({
-            uuid: uuid,
+        insert_transaction(uuid, {
             address_in: address_in,
             address_out: address_out,
             txid_in: txid_in,
@@ -174,18 +171,18 @@ app.post('/api/process_framework', express.json(), (req, res) => {
             status: 'pending',
             value_coin_convert: value_coin_convert,
             processed_at: new Date()
-        }); */
+        });
 
       
       // Notify user (WebSocket, email, etc.)
-      /*
+        /*
       notifyUser(address_in, 'pending', {
         uuid: uuid,
         amount: value_coin,
         coin: coin,
         usd_value: value_coin_convert ? JSON.parse(value_coin_convert).USD : null
       });
-
+        */
     } else if (pending === 0) {
       // Payment confirmed
       console.log(`Confirmed payment for ${order_id || user_id}: ${value_coin} ${coin.toUpperCase()} to ${address_in}`);
@@ -213,19 +210,21 @@ app.post('/api/process_framework', express.json(), (req, res) => {
         confirmations: confirmations
       });
       
-      // Notify user
-      notifyUser(address_in, 'confirmed', {
-        uuid: uuid,
-        amount: value_coin,
-        forwarded_amount: value_forwarded_coin,
-        coin: coin,
-        confirmations: confirmations
-      });
+        // Notify user
+        /*
+        notifyUser(address_in, 'confirmed', {
+            uuid: uuid,
+            amount: value_coin,
+            forwarded_amount: value_forwarded_coin,
+            coin: coin,
+            confirmations: confirmations
+        });
+        */
+        console.log('notify user please')
     }
   } else {
     console.log(`Duplicate webhook received for UUID: ${uuid}`);
   }
-  */
   // Always respond with *ok* or HTTP 200 to stop retries
   res.status(200).send('*ok*');
 });

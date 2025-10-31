@@ -68,5 +68,5 @@ export async function PurchaseFrameworks(PurchaseList, baseUrl) {
 }
 
 export function CompleteTransaction(orderId) {
-
+  
 }
