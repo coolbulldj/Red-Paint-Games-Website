@@ -353,7 +353,6 @@ app.post('/api/users', (req, res) => {
 //Shutdown Processes
 function ProcessShutdown() {
     console.log("closing server")
-    CloseDB();
 }
 
 process.on("SIGTERM", ProcessShutdown)
