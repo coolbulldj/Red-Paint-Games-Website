@@ -4,8 +4,9 @@ import path from 'path'
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { processLock } from '@supabase/supabase-js';
 
-const WalletAddress = 'BnT48WhnmLF13khMKn4fpsmQVKLrJYSbAKZhr6uxXHrq'
+const WalletAddress = process.env.WalletAddress || 'BnT48WhnmLF13khMKn4fpsmQVKLrJYSbAKZhr6uxXHrq'
 const CTCB_baseUrl = '/api/process_framework'
 
 const APIKEY = process.env.CRYPT_SECRET || 'backward_key'

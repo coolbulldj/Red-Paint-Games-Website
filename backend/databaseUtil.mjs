@@ -1,11 +1,11 @@
 // client.js
 import { createClient } from '@supabase/supabase-js'
 
-const SUPABASE_URL = 'https://zomzslewzfklfudwkxzk.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvbXpzbGV3emZrbGZ1ZHdreHprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMTExMTgsImV4cCI6MjA3Njg4NzExOH0.nBv32zcci-zYFs5JKSh4wJEJsIYLsE8mP7eUtQLS-kE'
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://zomzslewzfklfudwkxzk.supabase.co"
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpvbXpzbGV3emZrbGZ1ZHdreHprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMTExMTgsImV4cCI6MjA3Njg4NzExOH0.nBv32zcci-zYFs5JKSh4wJEJsIYLsE8mP7eUtQLS-kE"
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
+//git commit -m "add enviroment variables"
 
 export async function insert_transaction(uuid, insert_data) {
     const { data, error } = await supabase
